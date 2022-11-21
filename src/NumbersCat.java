@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class NumbersCat {
@@ -10,19 +9,31 @@ public class NumbersCat {
         int n = 0;
 
 
-        String[] nomsUnics = {"zero", "un", "dos", "tres", "quatre",
+       /* String[] numsUnics = {"zero", "un", "dos", "tres", "quatre",
                 "cinc", "sis", "set", "vuit", "nou", "deu", "onze", "dotze", "tretze", "catorze", "quinze", "setze", "disset", "divuit",
                 "dinou"};
 
-        demanarNum(n,nomsUnics);
+        */
+
+        demanarNum(n);
 
     }
 
-    private static void demanarNum(int n, String[] numsUnics) {
+     private static void demanarNum(int n) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Introdueix un nombre per pasar a escrit en catala: " );
         n = scanner.nextInt();
-        System.out.println(numsUnics[n]);
+
+        if (n<20) {
+            numsUnics(n);
+        }
+    }
+
+     private static void numsUnics(int n) {
+        String[] unicNums = {"zero", "un", "dos", "tres", "quatre",
+                "cinc", "sis", "set", "vuit", "nou", "deu", "onze", "dotze", "tretze", "catorze", "quinze", "setze", "disset", "divuit",
+                "dinou"};
+        System.out.println(unicNums[n]);
     }
 
 /*
