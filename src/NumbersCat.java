@@ -26,6 +26,8 @@ public class NumbersCat {
 
         if (n<20) {
             numsUnics(n);
+        }else {
+            System.out.println("Num mes gran que 19");
         }
     }
 
