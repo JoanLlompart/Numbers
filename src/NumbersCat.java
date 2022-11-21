@@ -6,27 +6,38 @@ public class NumbersCat {
         //cinc, sis, set, vuit, nou, deu, onze, dotze, tretze, catorze, quinze, setze, disset, divuit i
         //dinou.
 
-        int n = 0;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Introdueix un nombre per pasar a escrit en catala: ");
+        int n = scanner.nextInt();
+
+        n = 0;
 
 
        /* String[] numsUnics = {"zero", "un", "dos", "tres", "quatre",
                 "cinc", "sis", "set", "vuit", "nou", "deu", "onze", "dotze", "tretze", "catorze", "quinze", "setze", "disset", "divuit",
                 "dinou"};
 
+
         */
+
 
         demanarNum(n);
 
     }
 
      private static void demanarNum(int n) {
-        Scanner scanner = new Scanner(System.in);
+        /*Scanner scanner = new Scanner(System.in);
         System.out.println("Introdueix un nombre per pasar a escrit en catala: " );
         n = scanner.nextInt();
 
+
+         */
+
         if (0>n) {
             System.out.println("Num negatiu encara no esta preparat");
-            System.out.println("menos " + numsUnics(n));
+
+            n=-n;
+            System.out.println("Menys " + numsUnics(n));
 
         }else if (n<20) {
             numsUnics(n);
@@ -35,20 +46,21 @@ public class NumbersCat {
         }
     }
 
-     private static String numsUnics(int n) {
+     private static String numsUnics(long n) {
         String[] unicNums = {"zero", "un", "dos", "tres", "quatre",
                 "cinc", "sis", "set", "vuit", "nou", "deu", "onze", "dotze", "tretze", "catorze", "quinze", "setze", "disset", "divuit",
                 "dinou"};
-        System.out.println(unicNums[n]);
+
+        System.out.println(unicNums[(int)n]);//Els Arrays nomes accepten int i li pasam un long per pasar a int hem de fer un cast [(int)n]
          return null;
      }
-
+/*
 
     public static String say(long n) {
         //La funció “say” acceptarà un paràmetre de tipus “long” i tornarà un String amb les paraules
         //en català corresponents al número que li hem passat.
-        ;
 
+        demanarNum((int) n);
 
         return "";
     }
@@ -64,6 +76,8 @@ public class NumbersCat {
         return "";
     }
 
+
+ */
 
 
 }
