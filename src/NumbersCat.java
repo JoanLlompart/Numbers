@@ -24,21 +24,26 @@ public class NumbersCat {
         System.out.println("Introdueix un nombre per pasar a escrit en catala: " );
         n = scanner.nextInt();
 
-        if (n<20) {
+        if (0>n) {
+            System.out.println("Num negatiu encara no esta preparat");
+            System.out.println("menos " + numsUnics(n));
+
+        }else if (n<20) {
             numsUnics(n);
         }else {
             System.out.println("Num mes gran que 19");
         }
     }
 
-     private static void numsUnics(int n) {
+     private static String numsUnics(int n) {
         String[] unicNums = {"zero", "un", "dos", "tres", "quatre",
                 "cinc", "sis", "set", "vuit", "nou", "deu", "onze", "dotze", "tretze", "catorze", "quinze", "setze", "disset", "divuit",
                 "dinou"};
         System.out.println(unicNums[n]);
-    }
+         return null;
+     }
 
-/*
+
     public static String say(long n) {
         //La funció “say” acceptarà un paràmetre de tipus “long” i tornarà un String amb les paraules
         //en català corresponents al número que li hem passat.
@@ -48,8 +53,6 @@ public class NumbersCat {
         return "";
     }
 
- */
-/*
 
     public static long words(String s) {// La funció “words” fa l’operació inversa: transforma un String en un número de tipus long.
         return 0;
@@ -62,5 +65,5 @@ public class NumbersCat {
     }
 
 
- */
+
 }
