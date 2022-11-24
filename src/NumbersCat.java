@@ -1,12 +1,14 @@
 import java.util.Scanner;
 public class NumbersCat {
+    private static long n;
+
     public static void main(String[] args) {
         //Els números de 0 al 19 tenen noms únics. Aquests són: zero, un, dos, tres, quatre,
         //cinc, sis, set, vuit, nou, deu, onze, dotze, tretze, catorze, quinze, setze, disset, divuit i
         //dinou.
         Scanner scanner = new Scanner(System.in);
         System.out.println("Introdueix un nombre per pasar a escrit en catala: " );
-        int n = scanner.nextInt();
+       int n = scanner.nextInt();
 
 
 
@@ -18,12 +20,9 @@ public class NumbersCat {
     public static String say(long n) {
         //La funció “say” acceptarà un paràmetre de tipus “long” i tornarà un String amb les paraules
         //en català corresponents al número que li hem passat.
-        String[] unicNums = {"zero", "un", "dos", "tres", "quatre",
-                "cinc", "sis", "set", "vuit", "nou", "deu", "onze", "dotze", "tretze", "catorze", "quinze", "setze", "disset", "divuit",
-                "dinou"};
 
         String[] desena = {"","deu","vint","trenta","quaranta","cinquanta","seixanta","setanta","vuitanta","noranta"};//desenas
-        String[] centenas = {"","cent",};
+        String[] centenas = {"","cent"};
         int dec = (int) (n/10);//agafa la primera decena.
         int uni =((int)n%10); //guarda el residu es a dir la resta de numeros.
 /*
@@ -34,22 +33,27 @@ public class NumbersCat {
  */
 
 
+        String[] unicNums = {"zero", "un", "dos", "tres", "quatre",
+                "cinc", "sis", "set", "vuit", "nou", "deu", "onze", "dotze", "tretze", "catorze", "quinze", "setze", "disset", "divuit",
+                "dinou"};
         if (0>n) {
             n=-n; //feim que el numero sigui positiu. li llevam el menys(-)
             return "Menys " + unicNums[(int) n].toLowerCase();
 
         }
-        if (n > 20 && n <100) {
+        if (n <= 19){
+            return capitalLetter(unicNums[(int) n]);
+        }
+        if (n >= 20 && n <100) {
             if (uni==0){
-                return capitalLetter(desena[dec]);
-            }
+               return capitalLetter(desena[dec]);
+           }
             //decena(n, desena); //Crida a la funcio del 20 al 99
             if (n <30) { //el minim ja no fa falta el especifiquem ja que esta fet en el primer if
                 //int dec = (int) (n/10);//agafa la primera decena.
                 //int uni =((int)n%10); //guarda el residu es a dir la resta de numeros.
                 return capitalLetter(desena[dec])  + "-i-" + unicNums[uni].toLowerCase();
-            }
-            if (n<99) {
+            }else { //De 30 a 99
                 return capitalLetter(desena[dec]) + "-" + unicNums[uni].toLowerCase();
             }
         }
@@ -61,6 +65,7 @@ public class NumbersCat {
         String noPrimeraLletra = mayuscula.substring(1,mayuscula.length());
         return primerMayuscula + noPrimeraLletra;
     }
+
     /*private static String numsUnics(long n) {
         //System.out.println(unicNums[(int)n]);//Els Arrays nomes accepten int i li pasam un long per pasar a int hem de fer un cast [(int)n]
         return unicNums[(int)n];
