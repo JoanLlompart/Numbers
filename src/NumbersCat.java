@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class NumbersCat {
     public static void main(String[] args) {
         //Els números de 0 al 19 tenen noms únics. Aquests són: zero, un, dos, tres, quatre,
@@ -16,22 +15,17 @@ public class NumbersCat {
         //en català corresponents al número que li hem passat.
 
         String[] desena = {"", "deu", "vint", "trenta", "quaranta", "cinquanta", "seixanta", "setanta", "vuitanta", "noranta"};//desenas
-        //String[] centenas = {"", "cent","cents"};
-
-        //int cente = (int) (n / 100);//agafa la primera centena.
-        //int restaCent = ((int) n % 100); //guarda el residu es a dir la resta de numeros.
-
-        int dec = (int) (n / 10);//agafa la primera decena.
-        int uni = ((int) n % 10); //guarda el residu es a dir la resta de numeros.
         String[] unicNums = {"zero", "un", "dos", "tres", "quatre",
                 "cinc", "sis", "set", "vuit", "nou", "deu", "onze", "dotze", "tretze", "catorze", "quinze", "setze", "disset", "divuit",
                 "dinou"};
         String result="";
-        boolean negatiu = true;
+        boolean positiu = true;
         if (0 > n) {
             n = -n; //feim que el numero sigui positiu. li llevam el menys(-) (Funcio per nombres menors).
-            return "Menys " + unicNums[(int) n].toLowerCase();
+            positiu = false;
         }
+        int dec = (int) (n / 10);//agafa la primera decena.
+        int uni = ((int) n % 10); //guarda el residu es a dir la resta de numeros.
 
         if (n <= 19) {
             result =menorQueVint(n,unicNums);
@@ -43,10 +37,11 @@ public class NumbersCat {
             }
             //decena(n, desena); //Crida a la funcio del 20 al 99 (Crear funcio apart)
             if (n < 30) { //el minim ja no fa falta el especifiquem ja que esta fet en el primer if
-                result = vintena(n,desena,dec,unicNums,uni);
-               // return capitalLetter(desena[dec]) + "-i-" + unicNums[uni].toLowerCase();
+                result = vintena(desena,dec,unicNums,uni);
+                long resultVint  = Long.parseLong(vintena(desena,dec,unicNums,uni));
+                // return capitalLetter(desena[dec]) + "-i-" + unicNums[uni].toLowerCase();
             } else { //De 30 a 99
-                result = menysDe90(n,desena,dec,unicNums,uni);
+                result = menysDe90(desena,dec,unicNums,uni);
                 //return capitalLetter(desena[dec]) + "-" + unicNums[uni].toLowerCase();
             }
         }
@@ -61,8 +56,10 @@ public class NumbersCat {
             if (n > 100 && n < 200){
                 return capitalLetter(centenas[cente]) + " " + unicNums[restaCent].toLowerCase(); //Funciona fins a 109. A partir de alla falla.
             }
-
              */
+        }
+        if (positiu == false) {
+            result ="Menys " + result.toLowerCase();
         }
         return result;
     }
@@ -70,22 +67,32 @@ public class NumbersCat {
     private static String menysDeMil(long n, String[] desena, int dec, String[] unicNums, int uni) {
         int cente = (int) (n / 100);//agafa la primera centena.
         int restaCent = ((int) n % 100); //guarda el residu es a dir la resta de numeros.
+        int descenaRestaCent = ((int) restaCent / 10); //guarda el residu es a dir la resta de numeros.
         String[] centenas = {"", "cent","cents"};
         String resultCent = "";
 
-        if (uni==0) {
-            resultCent = capitalLetter(centenas[cente]);
-        }else if (n > 100 && n < 200){
-            resultCent = capitalLetter(centenas[cente]) + " " + unicNums[restaCent].toLowerCase(); //Funciona fins a 109. A partir de alla falla.
+        if (restaCent==0) {
+            resultCent = capitalLetter(centenas[cente]); //falta el doscents
+        }else if (n > 99 && n < 1000) {
+            if (n > 100 && n < 120) {
+                resultCent = capitalLetter(centenas[cente]) + " " + unicNums[restaCent].toLowerCase(); //Funciona fins a 109. A partir de alla falla.
+            }
+            if (n > 119 && n < 130) {
+                resultCent = capitalLetter(centenas[cente]) + " " + vintena(desena,descenaRestaCent,unicNums,uni).toLowerCase(); //Funciona fins a 109. A partir de alla falla.
+            }
+            if (n >=130 && n < 200) {
+                resultCent = capitalLetter(centenas[cente]) + " " +menysDe90(desena,descenaRestaCent,unicNums,uni).toLowerCase(); //Funciona fins a 109. A partir de alla falla.
+            }
+
         }
         return resultCent;
     }
 
-    private static String menysDe90(long n, String[] desena, int dec, String[] unicNums, int uni) {
+    private static String menysDe90(String[] desena, int dec, String[] unicNums, int uni) {
         return capitalLetter(desena[dec]) + "-" + unicNums[uni].toLowerCase();
     }
 
-    private static String vintena(long n,String[] desena,int dec,String[] unicNums,int uni) { //Escriu els nombres de 20 a 29
+    private static String vintena(String[] desena,int dec,String[] unicNums,int uni) { //Escriu els nombres de 20 a 29
         return capitalLetter(desena[dec]) + "-i-" + unicNums[uni].toLowerCase();
     }
 
@@ -108,3 +115,4 @@ public class NumbersCat {
         return "";
     }
 }
+
