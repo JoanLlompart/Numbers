@@ -67,8 +67,8 @@ public class NumbersCat {
     private static String menysDeMil(long n, String[] desena, int dec, String[] unicNums, int uni) {
         int cente = (int) (n / 100);//agafa la primera centena.
         int restaCent = ((int) n % 100); //guarda el residu es a dir la resta de numeros.
-        int descenaRestaCent = ((int) restaCent / 10); //guarda el residu es a dir la resta de numeros.
-        String[] centenas = {"", "cent","cents"};
+        int descenaRestaCent = ( restaCent / 10); //guarda el residu de restaCent i retorna una unidad.
+        String[] centenas = {"", "cent","dos-cents","tres-cents","quatre-cents","cinc-cents","sis-cents","set,cents","vuit-cents","nou-cents"};
         String resultCent = "";
 
         if (restaCent==0) {
@@ -78,10 +78,23 @@ public class NumbersCat {
                 resultCent = capitalLetter(centenas[cente]) + " " + unicNums[restaCent].toLowerCase(); //Funciona fins a 109. A partir de alla falla.
             }
             if (n > 119 && n < 130) {
-                resultCent = capitalLetter(centenas[cente]) + " " + vintena(desena,descenaRestaCent,unicNums,uni).toLowerCase(); //Funciona fins a 109. A partir de alla falla.
+                resultCent = capitalLetter(centenas[cente]) + " " + vintena(desena,descenaRestaCent,unicNums,uni).toLowerCase(); // els nombres que tenguin resta cent entre la vintena entrara a la funcio
+                // i li hem pasat els parametres que necesita per retornar la vintena.
             }
             if (n >=130 && n < 200) {
                 resultCent = capitalLetter(centenas[cente]) + " " +menysDe90(desena,descenaRestaCent,unicNums,uni).toLowerCase(); //Funciona fins a 109. A partir de alla falla.
+            }
+            if (n >= 200 && n <1000) { //Valors majors o iguals a 200 fins a 999.
+                if (restaCent == 0) { //Si la centena es sense decena entra i mostra la centena nomes.
+                    resultCent = capitalLetter(centenas[cente]);
+                }
+                if (restaCent < 20) //Agafam la decena Restacent
+                    resultCent = capitalLetter(centenas[cente]) + " " + unicNums[restaCent].toLowerCase();
+                else if (restaCent < 30) { //Si es menys de 30 la decena cridam i feim us de la funcio vintena i li pasam tots els parametres que necesita.
+                    resultCent = capitalLetter(centenas[cente]) + " " + vintena(desena,descenaRestaCent,unicNums,uni).toLowerCase();
+                } else {
+                    resultCent = capitalLetter(centenas[cente]) + " " + menysDe90(desena,descenaRestaCent,unicNums,uni).toLowerCase();
+                }
             }
 
         }
