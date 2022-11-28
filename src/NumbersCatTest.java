@@ -20,6 +20,7 @@ public class NumbersCatTest {
         assertEquals("Trenta", NumbersCat.say(30));
         assertEquals("Noranta-nou", NumbersCat.say(99));
         assertEquals("Vint", NumbersCat.say(20));
+        assertEquals("Vint-i-un", NumbersCat.say(21));
         assertEquals("Vint-i-set", NumbersCat.say(27));
         assertEquals("Menys seixanta-vuit", NumbersCat.say(-68));
     }
@@ -31,6 +32,12 @@ public class NumbersCatTest {
         assertEquals("Quatre-cents catorze", NumbersCat.say(414));
         assertEquals("Nou-cents noranta-nou", NumbersCat.say(999));
         assertEquals("Cinc-cents", NumbersCat.say(500));
+        assertEquals("Menys cinc-cents", NumbersCat.say(-500)); //Afegim test per nombres negatius.
+        assertEquals("Menys quatre-cents catorze", NumbersCat.say(-414));
+        assertEquals("Tres-cents trenta", NumbersCat.say(330));
+        assertEquals("Cent vint", NumbersCat.say(120));
+
+
     }
 
     @org.junit.Test
