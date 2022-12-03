@@ -99,14 +99,18 @@ public class NumbersCat {
             }else if (restaMil < 20) { //Si el restaMil no es zero
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) +  " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
             }else if (restaMil > 19 && restaMil <30) { // 2020 a 1029
-                resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + vintena(desena,dec,unicNums,uni); //Proba per solucionar error
+                resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + vintena(desena,dec,unicNums,uni).toLowerCase(); //Proba per solucionar error
 
             }else if (restaMil > 29 && restaMil <100){ // 2020 a 19099 // probar
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDe100(desena,dec,unicNums,uni).toLowerCase();
             } else if (restaMil > 99 && restaMil <1000){ // de 1099 a 1999
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
             }
-            }
+            }else if (milena > 19 && milena <30){
+            resultMenysDeMilio = capitalLetter(vintena(desena,dec,unicNums,uni)) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
+
+        }
+
         return resultMenysDeMilio;
     }
 
