@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class NumbersCat {
     public static void main(String[] args) {
         //Els números de 0 al 19 tenen noms únics. Aquests són: zero, un, dos, tres, quatre,
@@ -89,25 +88,16 @@ public class NumbersCat {
                 resultMenysDeMilio = capitalLetter(miler) + " " + menysDe100(desena,dec,unicNums,uni).toLowerCase();
             }else if (restaMil > 29 && restaMil <100) { //majors de 1029 i maxim 1099.
                 resultMenysDeMilio = capitalLetter(miler) + " " + menysDe100(desena,dec,unicNums,uni).toLowerCase();
-            }else if (restaMil > 99 && restaMil <1000){
+            }else if (restaMil > 99 && restaMil <1000){ // de 1099 a 1999
                 resultMenysDeMilio = capitalLetter(miler) + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
             }
-/*
-            if (restaMil > 30) { // de 1030 a 1999
-                resultMenysDeMilio = capitalLetter(miler) + " " + menysDeMil(n,desena,unicNums,uni,restaCent,unitatRestaCent,cente,descenaRestaCent);
-            }
-
-
- */
-
-            //if (milena < 2) {
-            //   resultMenysDeMilio = capitalLetter(miler) + " " + menysDeMil(n,desena,unicNums,restaMil);
-            //}
         }
+        if (milena > 1 && milena < 20) {
+             //fer milenas
+                resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler;
+            }
         return resultMenysDeMilio;
     }
-
-
 
 
     private static String menysDeMil(long n, String[] desena,int dec, String[] unicNums, int uni,int restaCent,int cente) {
@@ -165,6 +155,7 @@ public class NumbersCat {
         String noPrimeraLletra = mayuscula.substring(1, mayuscula.length());
         return primerMayuscula + noPrimeraLletra;
     }
+
 
 
     public static long words(String s) {// La funció “words” fa l’operació inversa: transforma un String en un número de tipus long.
