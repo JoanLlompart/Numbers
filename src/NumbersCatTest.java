@@ -47,6 +47,8 @@ public class NumbersCatTest {
         assertEquals("Mil vint", NumbersCat.say(1020)); //test propis
         assertEquals("Mil trenta", NumbersCat.say(1030));//test propis
         assertEquals("Mil quaranta", NumbersCat.say(1040));//test propis.
+        assertEquals("Mil cent quaranta", NumbersCat.say(1140));//test propis.
+        assertEquals("Mil cinc-cents", NumbersCat.say(1500));//test propis.
         assertEquals("Dos mil", NumbersCat.say(2000));
         assertEquals("Tres mil quatre-cents cinquanta-sis", NumbersCat.say(3456));
         assertEquals("Trenta mil cinc-cents quaranta-tres", NumbersCat.say(30_543));

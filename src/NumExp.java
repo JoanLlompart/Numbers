@@ -14,8 +14,6 @@ public class NumExp {
         System.out.println("Escriu un numero per pasar a nombre: ");
         String s = scanner.nextInt();
         words(String.valueOf(s));
-
-
         */
     }
     public static String say(long n) {
@@ -32,7 +30,7 @@ public class NumExp {
             n = -n; //feim que el numero sigui positiu. li llevam el menys(-) (Funcio per nombres menors).
             positiu = false;
         }
-        //Variables de
+        //Variables de unitats
 
         int milio = (int) (n / 1000000); // milio
         int restaMilio = (int) (n % 1000000); // restaMilio
