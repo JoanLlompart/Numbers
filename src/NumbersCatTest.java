@@ -50,9 +50,17 @@ public class NumbersCatTest {
         assertEquals("Mil cent quaranta", NumbersCat.say(1140));//test propis.
         assertEquals("Mil cinc-cents", NumbersCat.say(1500));//test propis.
         assertEquals("Dos mil", NumbersCat.say(2000));
+        assertEquals("Dos mil vint", NumbersCat.say(2020)); //test propis
+        assertEquals("Tres mil trenta", NumbersCat.say(3030));//test propis
+        assertEquals("Tres mil cent trenta", NumbersCat.say(3130));//test propis
+        assertEquals("Dinou mil quaranta", NumbersCat.say(19040));//test propis.
+        assertEquals("Deu mil vint-i-cinc", NumbersCat.say(10025));//test propis.
         assertEquals("Tres mil quatre-cents cinquanta-sis", NumbersCat.say(3456));
+        assertEquals("Quaranta-tres mil vint", NumbersCat.say(43_020));//test propis.
+        assertEquals("Quaranta-tres mil vint-i-nou", NumbersCat.say(43_029));//test propis.
         assertEquals("Trenta mil cinc-cents quaranta-tres", NumbersCat.say(30_543));
         assertEquals("Cent mil", NumbersCat.say(100_000));
+        assertEquals("Cinc-cents quaranta-tres mil", NumbersCat.say(543_000));//test propis.
         assertEquals("Nou-cents noranta-vuit mil vuit-cents vuitanta-nou", NumbersCat.say(998_889));
     }
 

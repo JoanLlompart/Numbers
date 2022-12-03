@@ -85,7 +85,7 @@ public class NumbersCat {
             if (restaMil < 20) { // de 1001 a 1019.
                 resultMenysDeMilio = capitalLetter(miler) + " " + unicNums[restaMil].toLowerCase(); //de 1001 a 1019.
             } else if (restaMil > 19 && restaMil <30){ // 1020 a 1029
-                resultMenysDeMilio = capitalLetter(miler) + " " + menysDe100(desena,dec,unicNums,uni).toLowerCase();
+                resultMenysDeMilio = capitalLetter(miler) + " " + vintena(desena,dec,unicNums,uni).toLowerCase();
             }else if (restaMil > 29 && restaMil <100) { //majors de 1029 i maxim 1099.
                 resultMenysDeMilio = capitalLetter(miler) + " " + menysDe100(desena,dec,unicNums,uni).toLowerCase();
             }else if (restaMil > 99 && restaMil <1000){ // de 1099 a 1999
@@ -94,7 +94,18 @@ public class NumbersCat {
         }
         if (milena > 1 && milena < 20) {
              //fer milenas
+            if (restaCent ==0) {
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler;
+            }else if (restaMil < 20) { //Si el restaMil no es zero
+                resultMenysDeMilio = capitalLetter(unicNums[milena]) +  " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
+            }else if (restaMil > 19 && restaMil <30) { // 2020 a 1029
+                resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + vintena(desena,dec,unicNums,uni); //Proba per solucionar error
+
+            }else if (restaMil > 29 && restaMil <100){ // 2020 a 19099 // probar
+                resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDe100(desena,dec,unicNums,uni).toLowerCase();
+            } else if (restaMil > 99 && restaMil <1000){ // de 1099 a 1999
+                resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
+            }
             }
         return resultMenysDeMilio;
     }
