@@ -44,6 +44,9 @@ public class NumbersCatTest {
     public void test4() {
         assertEquals("Mil un", NumbersCat.say(1001));
         assertEquals("Mil", NumbersCat.say(1000));
+        assertEquals("Mil vint", NumbersCat.say(1020)); //test propis
+        assertEquals("Mil trenta", NumbersCat.say(1030));//test propis
+        assertEquals("Mil quaranta", NumbersCat.say(1040));//test propis.
         assertEquals("Dos mil", NumbersCat.say(2000));
         assertEquals("Tres mil quatre-cents cinquanta-sis", NumbersCat.say(3456));
         assertEquals("Trenta mil cinc-cents quaranta-tres", NumbersCat.say(30_543));
@@ -93,11 +96,12 @@ public class NumbersCatTest {
 
     @org.junit.Test
     public void revTest1() {
+        assertEquals(-2, NumbersCat.words("Menys dos"));
         assertEquals(0, NumbersCat.words("Zero"));
         assertEquals(10, NumbersCat.words("Deu"));
         assertEquals(19, NumbersCat.words("Dinou"));
         assertEquals(6, NumbersCat.words("Sis"));
-        assertEquals(-2, NumbersCat.words("Menys dos"));
+
     }
 
     @org.junit.Test
