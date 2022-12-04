@@ -8,6 +8,16 @@ public class NumExp {
         System.out.println("Introdueix un nombre per pasar a escrit en catala: ");
         long n = scanner.nextInt();
         System.out.print(say(n));
+
+
+
+        /*
+        Scanner scanner= new Scanner(System.in);
+        System.out.println("Escriu un nombre en catala per pasar a long ");
+        String s=scanner.nextLine();
+        System.out.println(words(s));
+
+         */
     }
 
     public static String say(long n) {
@@ -28,16 +38,16 @@ public class NumExp {
 
         int milio = (int) (n / 1000000); // milio
         int restaMilio = (int) (n % 1000000); // restaMilio
-        int milena = (int) (restaMilio / 1000);//agafa la primera centena.
-        int restaMil = ((int) restaMilio % 1000); //guarda el residu es a dir la resta de numeros.
-        int cente = (int) (restaMil / 100);//agafa la primera centena.
-        int restaCent = ((int) restaMil % 100); //guarda el residu es a dir la resta de numeros.
-        int dec = (int) (restaCent / 10);//agafa la primera decena.
-        int uni = ((int) restaCent % 10); //guarda el residu es a dir la resta de numeros.
+        int milena = (restaMilio / 1000);//agafa la primera centena.
+        int restaMil = ( restaMilio % 1000); //guarda el residu es a dir la resta de numeros.
+        int cente = (restaMil / 100);//agafa la primera centena.
+        int restaCent = ( restaMil % 100); //guarda el residu es a dir la resta de numeros.
+        int dec =(restaCent / 10);//agafa la primera decena.
+        int uni = (restaCent % 10); //guarda el residu es a dir la resta de numeros.
         int uniMil = milena % 10; //per a la milena no giri els nombres residu de decMil
         int decMil = milena /10; // EX: 21000 --> 2 decMil i 1 uniMil.
 
-        if (n >0 && n<100 ) {
+        if (n >=0 && n<100 ) {
             result =finsA100(n, unicNums, uni, desena, dec);
         }
         //Numeros del 100 al 999.
@@ -103,13 +113,21 @@ public class NumExp {
             } else if (restaMil > 99 && restaMil < 1000) { // de 1099 a 1999
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDeMil(restaMil, desena, dec, unicNums, uni, restaCent, cente).toLowerCase();
             }
-        } else if (milena > 19 && milena <99){
+        } else if (milena > 19 && milena <100){ //prova 1000
             if (restaMil==0) {
                 resultMenysDeMilio = capitalLetter(finsA100(milena, unicNums, uniMil, desena, decMil)) + " " + miler;
-            }else if (restaCent <100) {
+            }else if (restaMil <100) { //Noranta-nou mil nou-cents noranta
                 resultMenysDeMilio = capitalLetter(finsA100(milena, unicNums, uniMil, desena, decMil)) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
-            }else if (restaCent<1000) {
+            }else if (restaMil<1000) {
                 resultMenysDeMilio = capitalLetter(finsA100(milena, unicNums, uniMil, desena, decMil)) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
+            }
+        } else if (milena>99 && milena <1000){
+            if (restaMil==0){ //milena mes  gran a 100 i sense centenes.
+                resultMenysDeMilio=capitalLetter(menysDeMil(milena,desena,decMil,unicNums,uniMil,restaCent,cente)) + " "+ miler;
+            }else if (restaMil<100){
+                resultMenysDeMilio = capitalLetter(menysDeMil(milena,desena,decMil,unicNums,uniMil,restaCent,cente)) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
+            }else if (restaMil<1000){
+            resultMenysDeMilio = capitalLetter(menysDeMil(milena,desena,decMil,unicNums,uniMil,restaCent,cente)) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
             }
         }
 
@@ -184,6 +202,7 @@ public class NumExp {
         }
         res = unitatsEscrit(s, res);
 
+
         if (positiu == false) {
             res = -res;
         }
@@ -220,41 +239,3 @@ public class NumExp {
         return "";
     }
 }
-/*
-else if (milena <1000) { //Majors que 100_000 i menors que 999_999
-            if (restaMil==0) { //Majors que 100_000 i amb restaMil a zero.
-                resultMenysDeMilio = menysDeMil(milena,desena,decMil,unicNums,uniMil,restaCent,cente) + " " + miler;
-            } else if (restaMil <100) { //milena MAJOR a 100 i restaMil MENOR a 100.
-                resultMenysDeMilio = menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
-            } else if (restaMil<1000) { //100_100 a 999_999
-                resultMenysDeMilio = menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
-            }
- */
-/*
-if (milena > 1 && milena < 20) {
-            //fer milenas
-            if (restaMil == 0) { //antes restamil
-                resultMenysDeMilio = unicNums[milena] + " " + miler;
-            } else if (restaMil < 100) { //Si el restaMil no es zero, de 1001 a 19999
-                resultMenysDeMilio = unicNums[milena] + " " + miler + " " + finsA100(restaMil,unicNums,uni,desena,dec).toLowerCase();
-            } else if (restaMil > 99 && restaMil < 1000) { // de 1099 a 1999
-                resultMenysDeMilio = unicNums[milena] + " " + miler + " " + menysDeMil(restaMil, desena, dec, unicNums, uni, restaCent, cente).toLowerCase();
-            }
-        } else if (milena > 19 && milena <100){
-            if (restaMil==0) {
-                resultMenysDeMilio = finsA100(milena, unicNums, uniMil, desena, decMil) + " " + miler;
-            }else if (restaMil <100) {
-                resultMenysDeMilio = finsA100(milena, unicNums, uniMil, desena, decMil) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
-            }else if (restaMil<1000) {
-                resultMenysDeMilio = finsA100(milena, unicNums, uniMil, desena, decMil) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
-            }
-        }else if (milena <1000) { //Majors que 100_000 i menors que 999_999
-            if (restaMil==0) { //Majors que 100_000 i amb restaMil a zero.
-                resultMenysDeMilio = menysDeMil(milena,desena,decMil,unicNums,uniMil,restaCent,cente) + " " + miler;
-            } else if (restaMil <100) { //milena MAJOR a 100 i restaMil MENOR a 100.
-                resultMenysDeMilio = menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
-            } else if (restaMil<1000) { //100_100 a 999_999
-                resultMenysDeMilio = menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
-            }
-        }
- */
