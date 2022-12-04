@@ -93,7 +93,7 @@ public class NumbersCat {
             }
         }
         if (milena > 1 && milena < 20) {
-             //fer milenas
+            //fer milenas
             if (restaCent ==0) {
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler;
             }else if (restaMil < 20) { //Si el restaMil no es zero
@@ -106,8 +106,11 @@ public class NumbersCat {
             } else if (restaMil > 99 && restaMil <1000){ // de 1099 a 1999
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
             }
-            }else if (milena > 19 && milena <30){
+        }else if (n > 19000 && n <30000){
             resultMenysDeMilio = capitalLetter(vintena(desena,dec,unicNums,uni)) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
+
+        }else if (n >29000 && n <100000){
+            resultMenysDeMilio=capitalLetter(menysDe100(desena,dec,unicNums,uni)) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
 
         }
 
@@ -184,13 +187,18 @@ public class NumbersCat {
             positiu = false;
             s = s.substring(6);
         }
-        res=  unitatsEscrit(s, res);
+        res= unitatsEscrit(s, res);//fins a dinou.
+      //  res = decenaEscrita(s);
+
+
 
         if (positiu==false){
             res=-res;
         }
         return res;
     }
+
+
 
     private static long unitatsEscrit(String s, long res) {
         switch (s) {
