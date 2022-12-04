@@ -7,14 +7,7 @@ public class NumExp {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Introdueix un nombre per pasar a escrit en catala: ");
         long n = scanner.nextInt();
-        //say(n);
         System.out.print(say(n));
-
-       /* Scanner scanner = new Scanner(System.in);
-        System.out.println("Escriu un numero per pasar a nombre: ");
-        String s = scanner.nextInt();
-        words(String.valueOf(s));
-        */
     }
 
     public static String say(long n) {
@@ -41,10 +34,8 @@ public class NumExp {
         int restaCent = ((int) restaMil % 100); //guarda el residu es a dir la resta de numeros.
         int dec = (int) (restaCent / 10);//agafa la primera decena.
         int uni = ((int) restaCent % 10); //guarda el residu es a dir la resta de numeros.
-        int uniMil = milena % 10;
-        int decMil = milena /10;
-        //int descenaRestaCent = ( restaCent / 10); //guarda el residu de restaCent i retorna una unidad.
-        //int unitatRestaCent = (restaCent % 10);
+        int uniMil = milena % 10; //per a la milena no giri els nombres residu de decMil
+        int decMil = milena /10; // EX: 21000 --> 2 decMil i 1 uniMil.
 
         if (n >0 && n<100 ) {
             result =finsA100(n, unicNums, uni, desena, dec);
@@ -107,10 +98,10 @@ public class NumExp {
             //fer milenas
             if (restaMil == 0) { //antes restamil
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler;
-            } else if (restaMil < 20) { //Si el restaMil no es zero
-                resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDeMil(restaMil, desena, dec, unicNums, uni, restaCent, cente).toLowerCase();
-            } else if (restaMil > 29 && restaMil < 100) { // 2020 a 19099 // probar
-                resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDe100(desena, dec, unicNums, uni).toLowerCase();
+            } else if (restaMil < 30) { //Si el restaMil no es zero
+                resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + finsA100(restaMil,unicNums,uni,desena,dec).toLowerCase();
+            //} //else if (restaMil > 29 && restaMil < 100) { // 2020 a 19099 // probar
+                //resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDe100(desena, dec, unicNums, uni).toLowerCase();
             } else if (restaMil > 99 && restaMil < 1000) { // de 1099 a 1999
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDeMil(restaMil, desena, dec, unicNums, uni, restaCent, cente).toLowerCase();
             }
