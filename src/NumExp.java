@@ -98,10 +98,8 @@ public class NumExp {
             //fer milenas
             if (restaMil == 0) { //antes restamil
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler;
-            } else if (restaMil < 30) { //Si el restaMil no es zero
+            } else if (restaMil < 100) { //Si el restaMil no es zero, de 1001 a 19999
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + finsA100(restaMil,unicNums,uni,desena,dec).toLowerCase();
-            //} //else if (restaMil > 29 && restaMil < 100) { // 2020 a 19099 // probar
-                //resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDe100(desena, dec, unicNums, uni).toLowerCase();
             } else if (restaMil > 99 && restaMil < 1000) { // de 1099 a 1999
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDeMil(restaMil, desena, dec, unicNums, uni, restaCent, cente).toLowerCase();
             }
