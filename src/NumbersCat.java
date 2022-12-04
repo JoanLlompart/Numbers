@@ -48,7 +48,7 @@ public class NumbersCat {
         //Menys de 1 milio.
         if (n > 999 && n < 1000000) {
             result = menysDeMilio(n, desena, dec, unicNums, uni, restaCent, cente, restaMil, milena,decMil,uniMil);
-        }
+        } //cridar a capitalLleters desde aqui per evitar repeticions.
 
         if (positiu == false) {
             result = "Menys " + result.toLowerCase();
@@ -103,16 +103,23 @@ public class NumbersCat {
             } else if (restaMil > 99 && restaMil < 1000) { // de 1099 a 1999
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDeMil(restaMil, desena, dec, unicNums, uni, restaCent, cente).toLowerCase();
             }
-        } else if (milena > 19 && milena <99){
+        } else if (milena > 19 && milena <100){
             if (restaMil==0) {
                 resultMenysDeMilio = capitalLetter(finsA100(milena, unicNums, uniMil, desena, decMil)) + " " + miler;
-            }else if (restaCent <100) {
+            }else if (restaMil <100) {
                 resultMenysDeMilio = capitalLetter(finsA100(milena, unicNums, uniMil, desena, decMil)) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
-            }else if (restaCent<1000) {
+            }else if (restaMil<1000) {
                 resultMenysDeMilio = capitalLetter(finsA100(milena, unicNums, uniMil, desena, decMil)) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
             }
+        }else if (milena <1000) { //Majors que 100_000 i menors que 999_999
+            if (restaMil==0) { //Majors que 100_000 i amb restaMil a zero.
+                resultMenysDeMilio = capitalLetter(menysDeMil(milena,desena,decMil,unicNums,uniMil,restaCent,cente)) + " " + miler;
+            } else if (restaMil <100) { //milena MAJOR a 100 i restaMil MENOR a 100.
+                resultMenysDeMilio = capitalLetter(menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente)) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
+            } else if (restaMil<1000) { //100_100 a 999_999
+                resultMenysDeMilio = capitalLetter(menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente)) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
+            }
         }
-
         return resultMenysDeMilio;
     }
     private static String menysDeMil(long n, String[] desena, int dec, String[] unicNums, int uni, int restaCent, int cente) {

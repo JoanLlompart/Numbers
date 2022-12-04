@@ -220,3 +220,41 @@ public class NumExp {
         return "";
     }
 }
+/*
+else if (milena <1000) { //Majors que 100_000 i menors que 999_999
+            if (restaMil==0) { //Majors que 100_000 i amb restaMil a zero.
+                resultMenysDeMilio = menysDeMil(milena,desena,decMil,unicNums,uniMil,restaCent,cente) + " " + miler;
+            } else if (restaMil <100) { //milena MAJOR a 100 i restaMil MENOR a 100.
+                resultMenysDeMilio = menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
+            } else if (restaMil<1000) { //100_100 a 999_999
+                resultMenysDeMilio = menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
+            }
+ */
+/*
+if (milena > 1 && milena < 20) {
+            //fer milenas
+            if (restaMil == 0) { //antes restamil
+                resultMenysDeMilio = unicNums[milena] + " " + miler;
+            } else if (restaMil < 100) { //Si el restaMil no es zero, de 1001 a 19999
+                resultMenysDeMilio = unicNums[milena] + " " + miler + " " + finsA100(restaMil,unicNums,uni,desena,dec).toLowerCase();
+            } else if (restaMil > 99 && restaMil < 1000) { // de 1099 a 1999
+                resultMenysDeMilio = unicNums[milena] + " " + miler + " " + menysDeMil(restaMil, desena, dec, unicNums, uni, restaCent, cente).toLowerCase();
+            }
+        } else if (milena > 19 && milena <100){
+            if (restaMil==0) {
+                resultMenysDeMilio = finsA100(milena, unicNums, uniMil, desena, decMil) + " " + miler;
+            }else if (restaMil <100) {
+                resultMenysDeMilio = finsA100(milena, unicNums, uniMil, desena, decMil) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
+            }else if (restaMil<1000) {
+                resultMenysDeMilio = finsA100(milena, unicNums, uniMil, desena, decMil) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
+            }
+        }else if (milena <1000) { //Majors que 100_000 i menors que 999_999
+            if (restaMil==0) { //Majors que 100_000 i amb restaMil a zero.
+                resultMenysDeMilio = menysDeMil(milena,desena,decMil,unicNums,uniMil,restaCent,cente) + " " + miler;
+            } else if (restaMil <100) { //milena MAJOR a 100 i restaMil MENOR a 100.
+                resultMenysDeMilio = menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
+            } else if (restaMil<1000) { //100_100 a 999_999
+                resultMenysDeMilio = menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
+            }
+        }
+ */
