@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class NumExp {
     public static void main(String[] args) {
         //Els números de 0 al 19 tenen noms únics. Aquests són: zero, un, dos, tres, quatre,
@@ -39,16 +40,16 @@ public class NumExp {
         int milio = (int) (n / 1000000); // milio
         int restaMilio = (int) (n % 1000000); // restaMilio
         int milena = (restaMilio / 1000);//agafa la primera centena.
-        int restaMil = ( restaMilio % 1000); //guarda el residu es a dir la resta de numeros.
+        int restaMil = (restaMilio % 1000); //guarda el residu es a dir la resta de numeros.
         int cente = (restaMil / 100);//agafa la primera centena.
-        int restaCent = ( restaMil % 100); //guarda el residu es a dir la resta de numeros.
-        int dec =(restaCent / 10);//agafa la primera decena.
+        int restaCent = (restaMil % 100); //guarda el residu es a dir la resta de numeros.
+        int dec = (restaCent / 10);//agafa la primera decena.
         int uni = (restaCent % 10); //guarda el residu es a dir la resta de numeros.
         int uniMil = milena % 10; //per a la milena no giri els nombres residu de decMil
-        int decMil = milena /10; // EX: 21000 --> 2 decMil i 1 uniMil.
+        int decMil = milena / 10; // EX: 21000 --> 2 decMil i 1 uniMil.
 
-        if (n >=0 && n<100 ) {
-            result =finsA100(n, unicNums, uni, desena, dec);
+        if (n >= 0 && n < 100) {
+            result = finsA100(n, unicNums, uni, desena, dec);
         }
         //Numeros del 100 al 999.
         if (n > 99 && n < 1000) { //Funcio menys de mil
@@ -57,7 +58,7 @@ public class NumExp {
 
         //Menys de 1 milio.
         if (n > 999 && n < 1000000) {
-            result = menysDeMilio(n, desena, dec, unicNums, uni, restaCent, cente, restaMil, milena,decMil,uniMil);
+            result = menysDeMilio(n, desena, dec, unicNums, uni, restaCent, cente, restaMil, milena, decMil, uniMil);
         }
 
         if (positiu == false) {
@@ -66,8 +67,8 @@ public class NumExp {
         return result;
     }
 
-    private static String finsA100(long n,String[] unicNums,int uni,String[]desena,int dec) {
-        String resultFins100 ="";
+    private static String finsA100(long n, String[] unicNums, int uni, String[] desena, int dec) {
+        String resultFins100 = "";
         if (n < 20) {
             resultFins100 = menorQueVint(n, unicNums);
         }
@@ -78,16 +79,14 @@ public class NumExp {
             //decena(n, desena); //Crida a la funcio del 20 al 99 (Crear funcio apart)
             if (n < 30) { //el minim ja no fa falta el especifiquem ja que esta fet en el primer if
                 resultFins100 = vintena(desena, dec, unicNums, uni);
-                // return capitalLetter(desena[dec]) + "-i-" + unicNums[uni].toLowerCase();
             } else { //De 30 a 99
                 resultFins100 = menysDe100(desena, dec, unicNums, uni);
-                //return capitalLetter(desena[dec]) + "-" + unicNums[uni].toLowerCase();
             }
         }
         return resultFins100;
     }
 
-    private static String menysDeMilio(long n, String[] desena, int dec, String[] unicNums, int uni, int restaCent, int cente, int restaMil, int milena,int decMil,int uniMil)  {
+    private static String menysDeMilio(long n, String[] desena, int dec, String[] unicNums, int uni, int restaCent, int cente, int restaMil, int milena, int decMil, int uniMil) {
         String miler = "mil";
         String resultMenysDeMilio = "";
 
@@ -109,30 +108,31 @@ public class NumExp {
             if (restaMil == 0) { //antes restamil
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler;
             } else if (restaMil < 100) { //Si el restaMil no es zero, de 1001 a 19999
-                resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + finsA100(restaMil,unicNums,uni,desena,dec).toLowerCase();
+                resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
             } else if (restaMil > 99 && restaMil < 1000) { // de 1099 a 1999
                 resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDeMil(restaMil, desena, dec, unicNums, uni, restaCent, cente).toLowerCase();
             }
-        } else if (milena > 19 && milena <100){ //prova 1000
-            if (restaMil==0) {
+        } else if (milena > 19 && milena < 100) { //prova 1000
+            if (restaMil == 0) {
                 resultMenysDeMilio = capitalLetter(finsA100(milena, unicNums, uniMil, desena, decMil)) + " " + miler;
-            }else if (restaMil <100) { //Noranta-nou mil nou-cents noranta
+            } else if (restaMil < 100) { //Noranta-nou mil nou-cents noranta
                 resultMenysDeMilio = capitalLetter(finsA100(milena, unicNums, uniMil, desena, decMil)) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
-            }else if (restaMil<1000) {
-                resultMenysDeMilio = capitalLetter(finsA100(milena, unicNums, uniMil, desena, decMil)) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
+            } else if (restaMil < 1000) {
+                resultMenysDeMilio = capitalLetter(finsA100(milena, unicNums, uniMil, desena, decMil)) + " " + miler + " " + menysDeMil(restaMil, desena, dec, unicNums, uni, restaCent, cente).toLowerCase();
             }
-        } else if (milena>99 && milena <1000){
-            if (restaMil==0){ //milena mes  gran a 100 i sense centenes.
-                resultMenysDeMilio=capitalLetter(menysDeMil(milena,desena,decMil,unicNums,uniMil,restaCent,cente)) + " "+ miler;
-            }else if (restaMil<100){
-                resultMenysDeMilio = capitalLetter(menysDeMil(milena,desena,decMil,unicNums,uniMil,restaCent,cente)) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
-            }else if (restaMil<1000){
-            resultMenysDeMilio = capitalLetter(menysDeMil(milena,desena,decMil,unicNums,uniMil,restaCent,cente)) + " " + miler + " " + menysDeMil(restaMil,desena,dec,unicNums,uni,restaCent,cente).toLowerCase();
+        } else if (milena > 99 && milena < 1000) {
+            if (restaMil == 0) { //milena mes  gran a 100 i sense centenes.
+                resultMenysDeMilio = capitalLetter(menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente)) + " " + miler;
+            } else if (restaMil < 100) {
+                resultMenysDeMilio = capitalLetter(menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente)) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
+            } else if (restaMil < 1000) {
+                resultMenysDeMilio = capitalLetter(menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente)) + " " + miler + " " + menysDeMil(restaMil, desena, dec, unicNums, uni, restaCent, cente).toLowerCase();
             }
         }
 
         return resultMenysDeMilio;
     }
+
     private static String menysDeMil(long n, String[] desena, int dec, String[] unicNums, int uni, int restaCent, int cente) {
         String[] centenas = {"", "cent", "dos-cents", "tres-cents", "quatre-cents", "cinc-cents", "sis-cents", "set,cents", "vuit-cents", "nou-cents"};
         String resultCent = "";
@@ -164,6 +164,7 @@ public class NumExp {
         }
         return resultCent;
     }
+
     private static String menysDe100(String[] desena, int dec, String[] unicNums, int uni) { //de 30 fins a 99
         if (uni == 0) { //Perque no torni un zero a les decenes si unitat es 0 escriu nomes la decena.
             return capitalLetter(desena[dec]);
@@ -179,6 +180,7 @@ public class NumExp {
             return capitalLetter(desena[dec]) + "-i-" + unicNums[uni].toLowerCase();
         }
     }
+
     private static String menorQueVint(long n, String[] unicNums) { //Menor
         return capitalLetter(unicNums[(int) n]);
     }
@@ -189,20 +191,18 @@ public class NumExp {
         String noPrimeraLletra = mayuscula.substring(1, mayuscula.length());
         return primerMayuscula + noPrimeraLletra;
     }
+
     public static long words(String s) {// La funció “words” fa l’operació inversa: transforma un String en un número de tipus long.
         s = s.toLowerCase();
         String[] ar = s.split(" "); //separa per caracters
-
         long res = 0;
         boolean positiu = true;
 
         if (ar[0].equals("menys")) {
             positiu = false;
-            s = s.substring(6);
+            s = s.substring(6); //
         }
         res = unitatsEscrit(s, res);
-
-
         if (positiu == false) {
             res = -res;
         }
