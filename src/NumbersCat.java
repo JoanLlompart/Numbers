@@ -5,9 +5,16 @@ public class NumbersCat {
         //cinc, sis, set, vuit, nou, deu, onze, dotze, tretze, catorze, quinze, setze, disset, divuit i
         //dinou.
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Introdueix un nombre per pasar a escrit en catala: ");
+       /* System.out.println("Introdueix un nombre per pasar a escrit en catala: ");
         long n = scanner.nextInt();
         System.out.print(say(n));
+
+
+        */
+        System.out.println("Introdueix un nombre per pasar a escrit en catala: ");
+        String s = scanner.nextLine();
+        System.out.println(words(s));
+
     }
     public static String say(long n) {
         //La funció “say” acceptarà un paràmetre de tipus “long” i tornarà un String amb les paraules
@@ -121,6 +128,7 @@ public class NumbersCat {
     private static String menysDeMil(long n, String[] desena, int dec, String[] unicNums, int uni, int restaCent, int cente) {
         String[] centenas = {"", "cent", "dos-cents", "tres-cents", "quatre-cents", "cinc-cents", "sis-cents", "set-cents", "vuit-cents", "nou-cents"};
         String resultCent = "";
+
         if (restaCent == 0) {
             resultCent = capitalLetter(centenas[cente]); //falta el doscents
         } else if (n > 99 && n < 1000) {
@@ -188,7 +196,10 @@ public class NumbersCat {
             positiu = false;
             s = s.substring(6); //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
         }
-        res = unitatsEscrit(s, res);
+
+        res = unitatsEscrit(s, res); //Funcio de nombres unics.
+        //res = vintEscrit(s,res);
+        
 
 
         if (positiu == false) {
@@ -197,7 +208,13 @@ public class NumbersCat {
         return res;
     }
 
+
+
     private static long unitatsEscrit(String s, long res) {
+        if (s.equals("zero")) {
+            res = 0;
+        }
+
         switch (s) {
             case "un" -> res = 1;
             case "dos" -> res = 2;
