@@ -198,7 +198,28 @@ public class NumbersCat {
         if (ar[0].equals("menys")) { //es negatiu si el primer caracter es menys.
             positiu = false;
             s = s.substring(6); //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
+            res = unitatsEscrit(s,res);
+        } else {
+            res +=identificarWords(s,res);
+            if (s.contains("-i-")) {
+                res += 20;
+                String residuVint = s.substring(7);
+                //String[] residuVint = s.split("-i-");
+                //String arr20[] = residuVint.split("-");
+                res =unitatsEscrit(residuVint,20);
+            } else if (s.equals("vint") || s.equals("trenta") || s.equals("quaranta") || s.equals("cinquanta") || s.equals("seixanta") || s.equals("setanta") || s.equals("vuitanta") || s.equals("noranta")) {
+                res = desena(s);
+            }
+
         }
+
+
+
+
+
+
+
+
 
         if (s.contains("-i-")) {
             res += 20;
@@ -216,6 +237,23 @@ public class NumbersCat {
 
         if (positiu == false) {
             res = -res; //Si es negatiu pasam el positiu a negatiu.
+        }
+        return res;
+    }
+
+    private static long identificarWords(String s, long res) {
+        switch (s) {
+            case "un","dos","tres","quantre","cinc","sis","set","vuit","nou" :
+                res += unitatsEscrit(s,res);
+                break;
+            case "deu","onze","dotze","tretze","catorze","quinze","setze","disset","divuit","dinou":
+                res += unitatsEscrit(s,res);
+                break;
+            case "vint","trenta","quaranta","cinquanta","seixanta","setanta","vuitanta","noranta":
+                res += desena(s);
+                break;
+            default:
+                System.err.println("Falta implementar, el valor que falla es " + s);
         }
         return res;
     }
