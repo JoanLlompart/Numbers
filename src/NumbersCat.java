@@ -229,9 +229,11 @@ public class NumbersCat {
             res =unitatsEscrit(residuVint,20);
         } else if (s.equals("vint") || s.equals("trenta") || s.equals("quaranta") || s.equals("cinquanta") || s.equals("seixanta") || s.equals("setanta") || s.equals("vuitanta") || s.equals("noranta")) {
             res = desena(s);
+        }else if (s.contains("-") && !s.contains("cents")) {
+            //valors menors de 100
+            String[] separaMenorCent = s.split("-");
+            res += desena(separaMenorCent[0]) + unitatsEscrit(separaMenorCent[1],res);
         }
-        //res = unitatsEscrit(s, res); //Funcio de nombres unics.
-
 
 
 
