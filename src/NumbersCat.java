@@ -5,15 +5,15 @@ public class NumbersCat {
         //cinc, sis, set, vuit, nou, deu, onze, dotze, tretze, catorze, quinze, setze, disset, divuit i
         //dinou.
         Scanner scanner = new Scanner(System.in);
-       /* System.out.println("Introdueix un nombre per pasar a escrit en catala: ");
+       System.out.println("Introdueix un nombre per pasar a escrit en catala: ");
         long n = scanner.nextInt();
         System.out.print(say(n));
 
 
-        */
-        System.out.println("Introdueix un nombre per pasar a escrit en catala: ");
-        String s = scanner.nextLine();
-        System.out.println(words(s));
+
+        //System.out.println("Introdueix un nombre per pasar a escrit en catala: ");
+        //String s = scanner.nextLine();
+        //System.out.println(words(s));
 
     }
     public static String say(long n) {
@@ -197,8 +197,12 @@ public class NumbersCat {
             s = s.substring(6); //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
         }
 
+        if (s.equalsIgnoreCase("vint")) {
+            String residuVint = s.substring(4);
+            String arr20[] = residuVint.split("-");
+        }
         res = unitatsEscrit(s, res); //Funcio de nombres unics.
-        //res = vintEscrit(s,res);
+
         
 
 
@@ -208,14 +212,10 @@ public class NumbersCat {
         return res;
     }
 
-
-
     private static long unitatsEscrit(String s, long res) {
-        if (s.equals("zero")) {
-            res = 0;
-        }
 
         switch (s) {
+            case "zero" -> res =0;
             case "un" -> res = 1;
             case "dos" -> res = 2;
             case "tres" -> res = 3;
@@ -236,8 +236,8 @@ public class NumbersCat {
             case "dinou" -> res = 19;
         }
         return res;
-    }
 
+    }
     public static String oper(String s) { //La funció “oper” acceptarà un String on hi ha números representats amb paraules que
         //operen amb altres números. Tornarà un String on hi ha el número (amb paraules) que surt
         //en haver realitzat les operacions.
