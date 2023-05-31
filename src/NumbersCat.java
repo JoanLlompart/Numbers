@@ -194,6 +194,7 @@ public class NumbersCat {
         long res = 0;
         boolean positiu = true;
 
+
         if (ar[0].equals("menys")) { //es negatiu si el primer caracter es menys.
             positiu = false;
             s = s.substring(6); //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
@@ -202,9 +203,11 @@ public class NumbersCat {
         if (s.contains("-i-")) {
             res += 20;
             String residuVint = s.substring(7);
+            //String[] residuVint = s.split("-i-");
             //String arr20[] = residuVint.split("-");
             res =unitatsEscrit(residuVint,20);
-
+        } else if (s.equals("vint") || s.equals("trenta") || s.equals("quaranta") || s.equals("cinquanta") || s.equals("seixanta") || s.equals("setanta") || s.equals("vuitanta") || s.equals("noranta")) {
+            res = desena(s);
         }
         //res = unitatsEscrit(s, res); //Funcio de nombres unics.
 
@@ -242,6 +245,29 @@ public class NumbersCat {
         }
         return res;
     }
+
+
+    private static long desena(String s) {
+        if (s.equals("vint")) {
+            return 20;
+        } else if (s.equals("trenta")) {
+            return 30;
+        } else if (s.equals("quaranta")) {
+            return 40;
+        } else if (s.equals("cinquanta")) {
+            return 50;
+        } else if (s.equals("seixanta")) {
+            return 60;
+        } else if (s.equals("setanta")) {
+            return 70;
+        } else if (s.equals("vuitanta")) {
+            return 80;
+        } else if (s.equals("noranta")) {
+            return 90;
+        }
+        return 0;
+    }
+
     public static String oper(String s) { //La funció “oper” acceptarà un String on hi ha números representats amb paraules que
         //operen amb altres números. Tornarà un String on hi ha el número (amb paraules) que surt
         //en haver realitzat les operacions.
