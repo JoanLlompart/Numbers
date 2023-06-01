@@ -193,28 +193,28 @@ public class NumbersCat {
 
         long res = 0;
         boolean positiu = true;
-
-        for (int posicio = ar.length-1; posicio >=0 ; posicio--) {
-
-        }
-
         if (ar[0].equals("menys")) { //es negatiu si el primer caracter es menys.
             positiu = false;
             s = s.substring(6); //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
             res = unitatsEscrit(s,res);
-        } else {
-            res +=identificarWords(s,res);
-            if (s.contains("-i-")) {
-                res += 20;
-                String residuVint = s.substring(7);
-                //String[] residuVint = s.split("-i-");
-                //String arr20[] = residuVint.split("-");
-                res =unitatsEscrit(residuVint,20);
-            } else if (s.equals("vint") || s.equals("trenta") || s.equals("quaranta") || s.equals("cinquanta") || s.equals("seixanta") || s.equals("setanta") || s.equals("vuitanta") || s.equals("noranta")) {
-                res = desena(s);
-            }
-
         }
+        for (int posicio = ar.length-1; posicio >=0 ; posicio--) {
+            if (positiu==false) {
+                continue;
+            }
+                res +=identificarWords(s,res);
+                if (s.contains("-i-")) {
+                    res += 20;
+                    String residuVint = s.substring(7);
+                    //String[] residuVint = s.split("-i-");
+                    //String arr20[] = residuVint.split("-");
+                    res =unitatsEscrit(residuVint,20);
+                } else if (s.equals("vint") || s.equals("trenta") || s.equals("quaranta") || s.equals("cinquanta") || s.equals("seixanta") || s.equals("setanta") || s.equals("vuitanta") || s.equals("noranta")) {
+                    res = desena(s);
+                }
+        }
+
+
 
 
 
@@ -236,10 +236,10 @@ public class NumbersCat {
             //valors menors de 100
             String[] separaMenorCent = s.split("-");
             // agafa la desena i la unitat
-            res += desena(separaMenorCent[0]) + unitatsEscrit(separaMenorCent[1],res);
+            res += desena(separaMenorCent[separaMenorCent.length-2]) + unitatsEscrit(separaMenorCent[separaMenorCent.length-1],res);
         } else if (s.contains("cents")) {
             String[] centsSepara = s.split("-");
-            res += unitatsEscrit(centsSepara[0],res) * 100;
+            res += unitatsEscrit(centsSepara[centsSepara.length-2],res) * 100;
 
         }
 
