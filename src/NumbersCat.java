@@ -194,6 +194,9 @@ public class NumbersCat {
         long res = 0;
         boolean positiu = true;
 
+        for (int posicio = ar.length-1; posicio >=0 ; posicio--) {
+
+        }
 
         if (ar[0].equals("menys")) { //es negatiu si el primer caracter es menys.
             positiu = false;
@@ -232,14 +235,19 @@ public class NumbersCat {
         }else if (s.contains("-") && !s.contains("cents")) {
             //valors menors de 100
             String[] separaMenorCent = s.split("-");
+            // agafa la desena i la unitat
             res += desena(separaMenorCent[0]) + unitatsEscrit(separaMenorCent[1],res);
-        }
+        } else if (s.contains("cents")) {
+            String[] centsSepara = s.split("-");
+            res += unitatsEscrit(centsSepara[0],res) * 100;
 
+        }
 
 
         if (positiu == false) {
             res = -res; //Si es negatiu pasam el positiu a negatiu.
         }
+
         return res;
     }
 
@@ -253,6 +261,9 @@ public class NumbersCat {
                 break;
             case "vint","trenta","quaranta","cinquanta","seixanta","setanta","vuitanta","noranta":
                 res += desena(s);
+                break;
+            case "cent":
+                res += 100;
                 break;
             default:
                 System.err.println("Falta implementar, el valor que falla es " + s);
