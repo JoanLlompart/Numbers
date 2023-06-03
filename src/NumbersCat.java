@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class NumbersCat {
     public static void main(String[] args) {
@@ -194,6 +195,10 @@ public class NumbersCat {
         long res = 0;
         boolean positiu = true;
         boolean milBoolean = false;
+
+        ArrayList<String> listResult = new ArrayList<>(); //guarda els resultats per despres concatenar.
+
+
         if (ar[0].equals("menys")) { //es negatiu si el primer caracter es menys.
             positiu = false;
             s = s.substring(6); //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
@@ -244,9 +249,11 @@ public class NumbersCat {
 
          */
 
+
         if (s.contains("mil")) {
             for (int i = ar.length-1; i >=0 ; i--) {
                 s = ar[i];
+
                // res = identificarWords(s, res);
                 if (s.equals("mil")) {
                     milBoolean= true;
@@ -263,7 +270,7 @@ public class NumbersCat {
                 } else {
                     res = identificarWords(s, res);
                 }
-
+                listResult.add(String.valueOf(res));
             }
         } else {
             for (int i = 0; i < ar.length; i++) {
