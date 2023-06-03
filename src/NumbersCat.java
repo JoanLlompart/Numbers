@@ -210,6 +210,10 @@ public class NumbersCat {
                 // res = identificarWords(s, res);
                 if (s.equals("mil")) {
                     milBoolean= true;
+                    if (i==0) {
+                        System.out.println("hola");
+                        res+=1000;
+                    }
                     continue;
                 }
                 if (milBoolean==true) {
