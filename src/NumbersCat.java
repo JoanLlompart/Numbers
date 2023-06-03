@@ -204,7 +204,7 @@ public class NumbersCat {
             s = s.substring(6); //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
             //res = unitatsEscrit(s,res);
         }
-            // for (int posicio = ar.length-1; posicio >=0 ; posicio--) {
+        // for (int posicio = ar.length-1; posicio >=0 ; posicio--) {
         /*
             if (positiu == false) {
                 continue;
@@ -254,7 +254,7 @@ public class NumbersCat {
             for (int i = ar.length-1; i >=0 ; i--) {
                 s = ar[i];
 
-               // res = identificarWords(s, res);
+                // res = identificarWords(s, res);
                 if (s.equals("mil")) {
                     milBoolean= true;
                     continue;
@@ -280,7 +280,7 @@ public class NumbersCat {
         }
 
 
-       // res  += identificarWords(s,res);
+        // res  += identificarWords(s,res);
 
 
         if (milBoolean==true) {
@@ -311,7 +311,8 @@ public class NumbersCat {
             case "mil":
                 res += 1000;
             default:
-                System.err.println("Falta implementar, el valor que falla es " + s);
+               // System.err.println("Falta implementar, el valor que falla es " + s);
+                break;
         }
 
 
@@ -330,9 +331,15 @@ public class NumbersCat {
             res =desena(separaMenorCent[separaMenorCent.length - 2]) + unitatsEscrit(separaMenorCent[separaMenorCent.length - 1], res);
         } else if (s.contains("cents")) {
             String[] centsSepara = s.split("-");
-            res = unitatsEscrit(centsSepara[centsSepara.length - 2], res) * 100; //TODO: ALERTA ANTES ESTABA AMB += (POSIBLE FALLO FUTUR HEM DE CONTROLAR)
+            long resTemp =0;
+
+            resTemp = unitatsEscrit(centsSepara[centsSepara.length - 2], resTemp);//TODO: ALERTA ANTES ESTABA AMB += (POSIBLE FALLO FUTUR HEM DE CONTROLAR)
+            resTemp *=100;
+            res += resTemp;
+            System.out.println(res);
+            System.out.println(resTemp);
         } else {
-           //res += identificarWords(s, res);
+            //res += identificarWords(s, res);
             return res;
         }
 
@@ -346,7 +353,7 @@ public class NumbersCat {
             case "un" -> res += 1;
             case "dos" -> res += 2;
             case "tres" -> res += 3;
-            case "quate" -> res += 4;
+            case "quatre" -> res += 4;
             case "cinc" -> res += 5;
             case "sis" -> res += 6;
             case "set" -> res += 7;
