@@ -273,7 +273,8 @@ public class NumbersCat {
             case "cent":
                 res += 100;
                 break;
-           // case "cents":
+            case "mil":
+                res += 1000;
             default:
                 System.err.println("Falta implementar, el valor que falla es " + s);
         }
