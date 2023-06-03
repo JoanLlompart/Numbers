@@ -193,6 +193,7 @@ public class NumbersCat {
 
         long res = 0;
         boolean positiu = true;
+        boolean milBoolean = false;
         if (ar[0].equals("menys")) { //es negatiu si el primer caracter es menys.
             positiu = false;
             s = s.substring(6); //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
@@ -243,14 +244,41 @@ public class NumbersCat {
 
          */
 
+        if (s.contains("mil")) {
+            for (int i = ar.length-1; i >=0 ; i--) {
+                s = ar[i];
+               // res = identificarWords(s, res);
+                if (s.equals("mil")) {
+                    milBoolean= true;
+                    continue;
+                }
+                if (milBoolean==true) {
+                    long resTemp = res; //guarda el resultat de antes de arribar a mil, de dreta a esquerra
+                    res = 0; //per poder multiplicar per mil el següent nombre
+                    res = identificarWords(s, res);
+                    res *= 1000; //pasam la cantidad que ocupa el miler a long es a dir el resultat de el nombre
+                    // escrit despres de la paraula mil * 1000.
+                    res += resTemp;
+                    milBoolean= false;
+                } else {
+                    res = identificarWords(s, res);
+                }
 
-        for (int i = 0; i < ar.length; i++) {
+            }
+        } else {
+            for (int i = 0; i < ar.length; i++) {
                 s = ar[i];
                 res = identificarWords(s, res);
             }
+        }
+
+
        // res  += identificarWords(s,res);
 
 
+        if (milBoolean==true) {
+            res +=1000;
+        }
 
         if (positiu == false) {
             res = -res; //Si es negatiu pasam el positiu a negatiu.
