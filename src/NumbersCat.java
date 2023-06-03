@@ -262,10 +262,10 @@ public class NumbersCat {
     private static long identificarWords(String s, long res) {
         switch (s) {
             case "un","dos","tres","quantre","cinc","sis","set","vuit","nou" :
-                res += unitatsEscrit(s,res);
+                res = unitatsEscrit(s,res);
                 break;
             case "deu","onze","dotze","tretze","catorze","quinze","setze","disset","divuit","dinou":
-                res += unitatsEscrit(s,res);
+                res = unitatsEscrit(s,res);
                 break;
             case "vint","trenta","quaranta","cinquanta","seixanta","setanta","vuitanta","noranta":
                 res += desena(s);
@@ -291,10 +291,10 @@ public class NumbersCat {
             //valors menors de 100
             String[] separaMenorCent = s.split("-");
             // agafa la desena i la unitat
-            res += desena(separaMenorCent[separaMenorCent.length - 2]) + unitatsEscrit(separaMenorCent[separaMenorCent.length - 1], res);
+            res =desena(separaMenorCent[separaMenorCent.length - 2]) + unitatsEscrit(separaMenorCent[separaMenorCent.length - 1], res);
         } else if (s.contains("cents")) {
             String[] centsSepara = s.split("-");
-            res += unitatsEscrit(centsSepara[centsSepara.length - 2], res) * 100;
+            res = unitatsEscrit(centsSepara[centsSepara.length - 2], res) * 100; //TODO: ALERTA ANTES ESTABA AMB += (POSIBLE FALLO FUTUR HEM DE CONTROLAR)
         } else {
            //res += identificarWords(s, res);
             return res;
@@ -306,25 +306,26 @@ public class NumbersCat {
     private static long unitatsEscrit(String s, long res) {
 
         switch (s) {
-            case "zero" -> res =0;
-            case "un" -> res = 1;
-            case "dos" -> res = 2;
-            case "tres" -> res = 3;
-            case "quate" -> res = 4;
-            case "cinc" -> res = 5;
-            case "sis" -> res = 6;
-            case "vuit" -> res = 8;
+            case "zero" -> res +=0;
+            case "un" -> res += 1;
+            case "dos" -> res += 2;
+            case "tres" -> res += 3;
+            case "quate" -> res += 4;
+            case "cinc" -> res += 5;
+            case "sis" -> res += 6;
+            case "set" -> res += 7;
+            case "vuit" -> res += 8;
             case "nou" -> res += 9;
-            case "deu" -> res = 10;
-            case "onze" -> res = 11;
-            case "dotze" -> res = 12;
-            case "tretze" -> res = 13;
-            case "catorze" -> res = 14;
-            case "quinze" -> res = 15;
-            case "setze" -> res = 16;
-            case "disset" -> res = 17;
-            case "divuit" -> res = 18;
-            case "dinou" -> res = 19;
+            case "deu" -> res += 10;
+            case "onze" -> res += 11;
+            case "dotze" -> res += 12;
+            case "tretze" -> res += 13;
+            case "catorze" -> res += 14;
+            case "quinze" -> res += 15;
+            case "setze" -> res += 16;
+            case "disset" -> res += 17;
+            case "divuit" -> res += 18;
+            case "dinou" -> res += 19;
         }
         return res;
     }
