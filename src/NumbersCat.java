@@ -196,7 +196,6 @@ public class NumbersCat {
         boolean positiu = true;
         boolean milBoolean = false;
 
-        ArrayList<String> listResult = new ArrayList<>(); //guarda els resultats per despres concatenar.
 
 
         if (ar[0].equals("menys")) { //es negatiu si el primer caracter es menys.
@@ -204,52 +203,6 @@ public class NumbersCat {
             s = s.substring(6); //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
             //res = unitatsEscrit(s,res);
         }
-        // for (int posicio = ar.length-1; posicio >=0 ; posicio--) {
-        /*
-            if (positiu == false) {
-                continue;
-            }
-
-            String num = ar[posicio];
-            res += identificarWords(num, res);
-
-            if (s.contains("-i-")) {
-                res += 20;
-                String residuVint = s.substring(7);
-                //String[] residuVint = s.split("-i-");
-                //String arr20[] = residuVint.split("-");
-                res = unitatsEscrit(residuVint, 20);
-            } else if (s.equals("vint") || s.equals("trenta") || s.equals("quaranta") || s.equals("cinquanta") || s.equals("seixanta") || s.equals("setanta") || s.equals("vuitanta") || s.equals("noranta")) {
-                res = desena(s);
-            }
-        //}
-
-             */
-
-        /*
-            if (s.contains("-i-")) {
-                res += 20;
-                String residuVint = s.substring(7);
-                //String[] residuVint = s.split("-i-");
-                //String arr20[] = residuVint.split("-");
-                res = unitatsEscrit(residuVint, 20);
-            } else if (s.equals("vint") || s.equals("trenta") || s.equals("quaranta") || s.equals("cinquanta") || s.equals("seixanta") || s.equals("setanta") || s.equals("vuitanta") || s.equals("noranta")) {
-                res = desena(s);
-            } else if (s.contains("-") && !s.contains("cents")) {
-                //valors menors de 100
-                String[] separaMenorCent = s.split("-");
-                // agafa la desena i la unitat
-                res += desena(separaMenorCent[separaMenorCent.length - 2]) + unitatsEscrit(separaMenorCent[separaMenorCent.length - 1], res);
-            } else if (s.contains("cents")) {
-                String[] centsSepara = s.split("-");
-                res += unitatsEscrit(centsSepara[centsSepara.length - 2], res) * 100;
-            } else {
-                res += identificarWords(s, res);
-            }
-
-         */
-
-
         if (s.contains("mil")) {
             for (int i = ar.length-1; i >=0 ; i--) {
                 s = ar[i];
@@ -266,11 +219,10 @@ public class NumbersCat {
                     res *= 1000; //pasam la cantidad que ocupa el miler a long es a dir el resultat de el nombre
                     // escrit despres de la paraula mil * 1000.
                     res += resTemp;
-                    milBoolean= false;
+                    //milBoolean= false;
                 } else {
                     res = identificarWords(s, res);
                 }
-                listResult.add(String.valueOf(res));
             }
         } else {
             for (int i = 0; i < ar.length; i++) {
@@ -278,14 +230,13 @@ public class NumbersCat {
                 res = identificarWords(s, res);
             }
         }
-
-
         // res  += identificarWords(s,res);
 
-
-        if (milBoolean==true) {
+       /* if (milBoolean==true) {
             res +=1000;
         }
+
+        */
 
         if (positiu == false) {
             res = -res; //Si es negatiu pasam el positiu a negatiu.
@@ -331,13 +282,14 @@ public class NumbersCat {
             res =desena(separaMenorCent[separaMenorCent.length - 2]) + unitatsEscrit(separaMenorCent[separaMenorCent.length - 1], res);
         } else if (s.contains("cents")) {
             String[] centsSepara = s.split("-");
+            //Variable temporal per guardar la centena
             long resTemp =0;
-
             resTemp = unitatsEscrit(centsSepara[centsSepara.length - 2], resTemp);//TODO: ALERTA ANTES ESTABA AMB += (POSIBLE FALLO FUTUR HEM DE CONTROLAR)
+            //la unitat de la centena se multiplica per cent per convertirse en centena.
             resTemp *=100;
+            //se suma el resTemp amb el resultat general i la suma es el nou res
             res += resTemp;
-            System.out.println(res);
-            System.out.println(resTemp);
+
         } else {
             //res += identificarWords(s, res);
             return res;
