@@ -233,7 +233,7 @@ public class NumbersCat {
                     res *= 1000; //pasam la cantidad que ocupa el miler a long es a dir el resultat de el nombre
                     // escrit despres de la paraula mil * 1000.
                     res += resTemp;
-                    //milBoolean= false;
+                    milBoolean= false;
                 } else if (milioBoolean==true) {
                     long resTemp = res;
                     res = 0;
@@ -242,6 +242,7 @@ public class NumbersCat {
                     res += resTemp;
                 } else if (milionsBool==true) {
                     System.out.println("ha entrat.");
+                    milBoolean=false;
                     long resTemp = res;
                     res = 0;
                     res = identificarWords(s,res);
