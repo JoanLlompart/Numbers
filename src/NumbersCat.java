@@ -197,6 +197,9 @@ public class NumbersCat {
         boolean milBoolean = false;
         boolean milioBoolean = false;
         boolean milionsBool = false;
+        boolean bilioBool = false;
+        boolean boolBilions = false;
+
 
 
         if (ar[0].equals("menys")) { //es negatiu si el primer caracter es menys.
@@ -204,10 +207,10 @@ public class NumbersCat {
             s = s.substring(6); //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
             //res = unitatsEscrit(s,res);
         }
-        if (s.contains("mil") || s.contains("milió") && s.contains("milions")) {
+        if (s.contains("mil") || s.contains("milió") || s.contains("milions") || s.contains("bilió") || s.contains("bilions")) {
+
             for (int i = ar.length-1; i >=0 ; i--) {
                 s = ar[i];
-
                 // res = identificarWords(s, res);
                 if (s.equals("mil")) {
                     milBoolean= true;
@@ -236,6 +239,15 @@ public class NumbersCat {
                     //Desactiva el boolean de els milers
                     milBoolean=false;
                     continue;
+                } else if (s.equals("bilió")) {
+                    //activa el boolea de el bilió
+                    bilioBool=true;
+                    continue;
+
+                } else if (s.equals("bilions")) {
+                    //activa el boolea de el bilions
+                    boolBilions=true;
+                    continue;
                 }
 
 
@@ -257,7 +269,7 @@ public class NumbersCat {
                     res = identificarWords(s,res);
                     res *=1_000_000;
                     res += resTemp;
-                } else if (milionsBool==true) {
+                } else if (milionsBool) {
                     System.out.println("ha entrat.");
                     milBoolean=false;
                     long resTemp = res;
@@ -265,6 +277,16 @@ public class NumbersCat {
                     res = identificarWords(s,res);
                     res *= 1_000_000;
                     res += resTemp;
+                } else if (bilioBool) {
+                    long resTemp = res;
+                    res = 0;
+                    res = identificarWords(s,res);
+                    //multiplica per un bilió
+                    res *= 1_000_000_000_000L;
+                    res += resTemp;
+
+                } else if (boolBilions) {
+
                 } else {
                     res = identificarWords(s, res);
                 }
