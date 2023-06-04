@@ -247,6 +247,9 @@ public class NumbersCat {
                 } else if (s.equals("bilions")) {
                     //activa el boolea de el bilions
                     boolBilions=true;
+                    //posam a false els milions i milers
+                    milionsBool= false;
+                    milBoolean = false;
                     continue;
                 }
 
@@ -286,7 +289,12 @@ public class NumbersCat {
                     res += resTemp;
 
                 } else if (boolBilions) {
-
+                    long resTemp = res;
+                    res = 0;
+                    res = identificarWords(s,res);
+                    //multiplica per un bilió
+                    res *= 1_000_000_000_000L;
+                    res += resTemp;
                 } else {
                     res = identificarWords(s, res);
                 }
