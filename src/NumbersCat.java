@@ -240,6 +240,8 @@ public class NumbersCat {
                     milBoolean=false;
                     continue;
                 } else if (s.equals("bilió")) {
+                    milionsBool= false;
+                    milBoolean = false;
                     //activa el boolea de el bilió
                     bilioBool=true;
                     continue;
@@ -262,6 +264,9 @@ public class NumbersCat {
                     // escrit despres de la paraula mil * 1000.
                     if (milionsBool==true) {
                         res *=1_000_000;
+                    } else if (boolBilions) {
+                        //per si son mil x bilions.
+                        res *= 1_000_000_000_000L;
                     }
                     res += resTemp;
                    // milBoolean= false;
