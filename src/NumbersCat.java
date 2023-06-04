@@ -195,6 +195,7 @@ public class NumbersCat {
         long res = 0;
         boolean positiu = true;
         boolean milBoolean = false;
+        boolean milioBoolean = false;
 
 
 
@@ -203,7 +204,7 @@ public class NumbersCat {
             s = s.substring(6); //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
             //res = unitatsEscrit(s,res);
         }
-        if (s.contains("mil")) {
+        if (s.contains("mil") || s.contains("milió") && s.contains("milions")) {
             for (int i = ar.length-1; i >=0 ; i--) {
                 s = ar[i];
 
@@ -211,11 +212,17 @@ public class NumbersCat {
                 if (s.equals("mil")) {
                     milBoolean= true;
                     if (i==0) {
-                        System.out.println("hola");
+                        //si es la darrera posicio, es mil.
                         res+=1000;
                     }
                     continue;
+                } else if (s.equals("milió")) {
+                    milioBoolean=true;
+                    //res =1_000_000;
+                    continue;
                 }
+
+
                 if (milBoolean==true) {
                     long resTemp = res; //guarda el resultat de antes de arribar a mil, de dreta a esquerra
                     res = 0; //per poder multiplicar per mil el següent nombre
@@ -224,6 +231,12 @@ public class NumbersCat {
                     // escrit despres de la paraula mil * 1000.
                     res += resTemp;
                     //milBoolean= false;
+                } else if (milioBoolean==true) {
+                    long resTemp = res;
+                    res = 0;
+                    res = identificarWords(s,res);
+                    res *=1_000_000;
+                    res += resTemp;
                 } else {
                     res = identificarWords(s, res);
                 }
