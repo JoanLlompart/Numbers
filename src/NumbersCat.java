@@ -466,6 +466,11 @@ public class NumbersCat {
     public static String oper(String s) { //La funció “oper” acceptarà un String on hi ha números representats amb paraules que
         //operen amb altres números. Tornarà un String on hi ha el número (amb paraules) que surt
         //en haver realitzat les operacions.
-        return "";
+
+       long numLong= words(s);
+        System.out.println(numLong);
+
+        String resultat = say(numLong);
+        return resultat;
     }
 }
