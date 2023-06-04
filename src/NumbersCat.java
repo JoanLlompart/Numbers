@@ -196,7 +196,7 @@ public class NumbersCat {
         boolean positiu = true;
         boolean milBoolean = false;
         boolean milioBoolean = false;
-
+        boolean milionsBool = false;
 
 
         if (ar[0].equals("menys")) { //es negatiu si el primer caracter es menys.
@@ -220,6 +220,9 @@ public class NumbersCat {
                     milioBoolean=true;
                     //res =1_000_000;
                     continue;
+                } else if (s.equals("milions")) {
+                    milionsBool=true;
+                    continue;
                 }
 
 
@@ -236,6 +239,13 @@ public class NumbersCat {
                     res = 0;
                     res = identificarWords(s,res);
                     res *=1_000_000;
+                    res += resTemp;
+                } else if (milionsBool==true) {
+                    System.out.println("ha entrat.");
+                    long resTemp = res;
+                    res = 0;
+                    res = identificarWords(s,res);
+                    res *= 1_000_000;
                     res += resTemp;
                 } else {
                     res = identificarWords(s, res);
