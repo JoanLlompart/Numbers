@@ -222,6 +222,7 @@ public class NumbersCat {
                     continue;
                 } else if (s.equals("milions")) {
                     milionsBool=true;
+                    milBoolean=false;
                     continue;
                 }
 
@@ -233,8 +234,9 @@ public class NumbersCat {
                     res *= 1000; //pasam la cantidad que ocupa el miler a long es a dir el resultat de el nombre
                     // escrit despres de la paraula mil * 1000.
                     res += resTemp;
-                    milBoolean= false;
+                   // milBoolean= false;
                 } else if (milioBoolean==true) {
+                    milBoolean=false;
                     long resTemp = res;
                     res = 0;
                     res = identificarWords(s,res);
