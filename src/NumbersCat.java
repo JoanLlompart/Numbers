@@ -211,9 +211,19 @@ public class NumbersCat {
                 // res = identificarWords(s, res);
                 if (s.equals("mil")) {
                     milBoolean= true;
-                    if (i==0) {
+                    if (i==0 && milionsBool==false) {
                         //si es la darrera posicio, es mil.
                         res+=1000;
+                    } else if (i==0 && milionsBool==true) {
+                        //casos especials, que com mil milions , el darrer valor desde dreta cap esquerra <--
+                        // milioBool esta activat.
+                        if (res<1_000) {
+                            //si el resultat actual es mes petit que mil
+                            //afegim mil
+                            res += 1_000;
+                        }
+                        //multiplicam el resultat actual per mil
+                        res *=1_000_000;
                     }
                     continue;
                 } else if (s.equals("milió")) {
@@ -221,7 +231,9 @@ public class NumbersCat {
                     //res =1_000_000;
                     continue;
                 } else if (s.equals("milions")) {
+                    //activa el boolea de els milions
                     milionsBool=true;
+                    //Desactiva el boolean de els milers
                     milBoolean=false;
                     continue;
                 }
@@ -233,6 +245,9 @@ public class NumbersCat {
                     res = identificarWords(s, res);
                     res *= 1000; //pasam la cantidad que ocupa el miler a long es a dir el resultat de el nombre
                     // escrit despres de la paraula mil * 1000.
+                    if (milionsBool==true) {
+                        res *=1_000_000;
+                    }
                     res += resTemp;
                    // milBoolean= false;
                 } else if (milioBoolean==true) {
