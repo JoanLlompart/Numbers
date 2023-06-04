@@ -267,6 +267,7 @@ public class NumbersCat {
                     milionsBool= false;
                     milBoolean = false;
                     bilioBool=false;
+                    boolBilions = false;
                     //activa el boolea d'el trilions
                     trilionsBool=true;
                     continue;
@@ -303,6 +304,7 @@ public class NumbersCat {
                     res *= 1_000_000;
                     res += resTemp;
                 } else if (bilioBool) {
+                    milionsBool=false;
                     long resTemp = res;
                     res = 0;
                     res = identificarWords(s,res);
@@ -311,6 +313,7 @@ public class NumbersCat {
                     res += resTemp;
 
                 } else if (boolBilions) {
+                    milionsBool =false;
                     long resTemp = res;
                     res = 0;
                     res = identificarWords(s,res);
@@ -318,6 +321,7 @@ public class NumbersCat {
                     res *= 1_000_000_000_000L;
                     res += resTemp;
                 } else if (booltrilió) {
+                    boolBilions= false;
                     long resTemp = res;
                     res = 0;
                     res = identificarWords(s,res);
@@ -325,6 +329,7 @@ public class NumbersCat {
                     res *= 1_000_000_000_000_000_000L;
                     res += resTemp;
                 } else if (trilionsBool) {
+                    boolBilions= false;
                     long resTemp = res;
                     res = 0;
                     res = identificarWords(s,res);
