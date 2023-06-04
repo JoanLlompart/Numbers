@@ -199,15 +199,15 @@ public class NumbersCat {
         boolean milionsBool = false;
         boolean bilioBool = false;
         boolean boolBilions = false;
-
-
+        boolean booltrilió =false;
+        boolean trilionsBool = false;
 
         if (ar[0].equals("menys")) { //es negatiu si el primer caracter es menys.
             positiu = false;
             s = s.substring(6); //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
-            //res = unitatsEscrit(s,res);
         }
-        if (s.contains("mil") || s.contains("milió") || s.contains("milions") || s.contains("bilió") || s.contains("bilions")) {
+        if (s.contains("mil") || s.contains("milió") || s.contains("milions") || s.contains("bilió") ||
+                s.contains("bilions") ||s.contains("trilió") || s.contains("trilions")) {
 
             for (int i = ar.length-1; i >=0 ; i--) {
                 s = ar[i];
@@ -252,6 +252,23 @@ public class NumbersCat {
                     //posam a false els milions i milers
                     milionsBool= false;
                     milBoolean = false;
+                    continue;
+                } else if (s.equals("trilió")) {
+                    // Desactiva els booleans de els mil,milions
+                    milionsBool= false;
+                    milBoolean = false;
+                    bilioBool=false;
+                    //activa el boolea de el trilió
+                    booltrilió=true;
+                    continue;
+                } else if (s.equals("trilions")) {
+                    // Desactiva els booleans de els mil,milions
+
+                    milionsBool= false;
+                    milBoolean = false;
+                    bilioBool=false;
+                    //activa el boolea d'el trilions
+                    trilionsBool=true;
                     continue;
                 }
 
@@ -299,6 +316,20 @@ public class NumbersCat {
                     res = identificarWords(s,res);
                     //multiplica per un bilió
                     res *= 1_000_000_000_000L;
+                    res += resTemp;
+                } else if (booltrilió) {
+                    long resTemp = res;
+                    res = 0;
+                    res = identificarWords(s,res);
+                    //multiplica per un bilió
+                    res *= 1_000_000_000_000_000_000L;
+                    res += resTemp;
+                } else if (trilionsBool) {
+                    long resTemp = res;
+                    res = 0;
+                    res = identificarWords(s,res);
+                    //multiplica per un bilió
+                    res *= 1_000_000_000_000_000_000L;
                     res += resTemp;
                 } else {
                     res = identificarWords(s, res);
