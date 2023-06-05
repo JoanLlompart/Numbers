@@ -8,17 +8,19 @@ public class NumbersCat {
         //cinc, sis, set, vuit, nou, deu, onze, dotze, tretze, catorze, quinze, setze, disset, divuit i
         //dinou.
         Scanner scanner = new Scanner(System.in);
-        /*System.out.println("Introdueix un nombre per pasar a escrit en catala: ");
+        System.out.println("Introdueix un nombre per pasar a escrit en catala: ");
         long n = scanner.nextInt();
         System.out.print(say(n));
 
 
 
-         */
 
+/*
         System.out.println("Introdueix un nombre per pasar a escrit en catala: ");
         String s = scanner.nextLine();
         System.out.println(words(s));
+
+ */
 
     }
     public static String say(long n) {
