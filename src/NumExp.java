@@ -20,7 +20,6 @@ public class NumExp {
 
          */
     }
-
     public static String say(long n) {
         //La funció “say” acceptarà un paràmetre de tipus “long” i tornarà un String amb les paraules
         //en català corresponents al número que li hem passat.
