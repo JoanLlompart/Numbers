@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
+
 public class NumbersCat {
     public static void main(String[] args) {
         //Els números de 0 al 19 tenen noms únics. Aquests són: zero, un, dos, tres, quatre,
@@ -466,11 +468,67 @@ public class NumbersCat {
     public static String oper(String s) { //La funció “oper” acceptarà un String on hi ha números representats amb paraules que
         //operen amb altres números. Tornarà un String on hi ha el número (amb paraules) que surt
         //en haver realitzat les operacions.
+        long numLong=0;
+        s = s.toLowerCase();
+        String[] ar = s.split(" "); //separa per caracters
+        String primerValor ="";
+        boolean numDespresDeOperador = false;
 
-       long numLong= words(s);
-        System.out.println(numLong);
+        long valor1= 0;
+        long valor2 =1;
+        String oper ="";
 
-        String resultat = say(numLong);
+        long result =0;
+        for (int i = 0; i < ar.length; i++) {
+            s = ar[i];
+
+            if (s.equals("menys") || s.equals("més") || s.equals("dividit") || s.equals("per")) {
+                // si es un operador amb el proxim nombre se ha de operar
+                numDespresDeOperador=true;
+                oper = s;
+                continue;
+            } else {
+                valor2 = valor1;
+                valor1=words(s);
+            }
+
+            if (numDespresDeOperador) {
+                result =operacio(valor2,valor1,oper);
+                break;
+            }
+
+
+        }
+
+
+
+        //result= words(s);
+        String resultatFinal = say(result);
+        return resultatFinal;
+    }
+
+    private static long operacio(long valor1,long valor2,String oper) {
+        long resultat =0;
+        switch (oper) {
+            case "menys":
+                resultat= valor1 - valor2;
+                break;
+
+            case "més":
+                resultat= valor1 + valor2;
+                break;
+            case "dividit":
+                resultat= valor1/valor2;
+
+                break;
+
+            case "per":
+                resultat= valor1 * valor2;
+
+                break;
+            default:
+                break;
+        }
         return resultat;
     }
 }
