@@ -350,13 +350,6 @@ public class NumbersCat {
                 res = identificarWords(s, res);
             }
         }
-        // res  += identificarWords(s,res);
-
-       /* if (milBoolean==true) {
-            res +=1000;
-        }
-
-        */
 
         if (positiu == false) {
             res = -res; //Si es negatiu pasam el positiu a negatiu.
