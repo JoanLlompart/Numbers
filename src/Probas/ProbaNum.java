@@ -1,6 +1,10 @@
 package Probas;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ProbaNum {
         /*public static void main(String[] args) {
@@ -480,30 +484,61 @@ public class ProbaNum {
         //en haver realitzat les operacions.
         long numLong = 0;
         s = s.toLowerCase();
+
+        //String [] separaOp = {"menys","més","dividit","per"};
+       // String[] proba = s.split("menys |més|dividit|per");
+
+
+       // String[] partes = s.split("(menys |més|dividit|per)");
+
+
         String[] ar = s.split(" "); //separa per caracters
-        String primerValor = "";
+
+        //String primerValor = "";
         boolean numDespresDeOperador = false;
 
         long valor1 = 0;
         long valor2 = 1;
         String oper = "";
+        String numStr1 ="";
+        String numStr2 = "";
 
+        //boolean per determinar si ja hi ha els nombres
+        boolean llestPerOperar = false;
         long result = 0;
         for (int i = 0; i < ar.length; i++) {
             s = ar[i];
+            /*oper = proba[i];
+            while (oper == s) {
+                s += ar[i+1];
+                System.out.println();
+            }
 
+             */
             if (s.equals("menys") || s.equals("més") || s.equals("dividit") || s.equals("per")) {
                 // si es un operador amb el proxim nombre se ha de operar
                 numDespresDeOperador = true;
                 oper = s;
                 continue;
             } else {
-                valor2 = valor1;
-                valor1 = words(s);
+                if (!numDespresDeOperador) { //si es un nombre que va despres de el operador
+                    System.out.println("ha entrat despres");
+                    numStr1 += s;
+                } else{
+                    numStr2 += s;
+                }
+
+                valor2 = words(numStr2);
+                //valor1 = Long.parseLong(numStr1);
+                valor1 = words(numStr1);
+
+               // valor2 = valor1;
+               // valor1 = words(s);
             }
 
             if (numDespresDeOperador) {
-                result = operacio(valor2, valor1, oper);
+                result = operacio(valor1,valor2, oper);
+                numDespresDeOperador=false;
                 break;
             }
 

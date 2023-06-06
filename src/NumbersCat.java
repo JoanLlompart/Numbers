@@ -491,11 +491,7 @@ public class NumbersCat {
                 result =operacio(valor2,valor1,oper);
                 break;
             }
-
-
         }
-
-
 
         //result= words(s);
         String resultatFinal = say(result);
