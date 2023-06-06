@@ -131,6 +131,8 @@ public class NumbersCatTest {
         assertEquals(211, NumbersCat.words("Dos-cents onze"));
         assertEquals(100, NumbersCat.words("Cent"));
         assertEquals(967, NumbersCat.words("Nou-cents seixanta-set"));
+        assertEquals(721, NumbersCat.words(" Set-cents vint-i-un"));
+
     }
 
     @org.junit.Test

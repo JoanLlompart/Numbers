@@ -523,9 +523,9 @@ public class ProbaNum {
             } else {
                 if (!numDespresDeOperador) { //si es un nombre que va despres de el operador
                     System.out.println("ha entrat despres");
-                    numStr1 += s;
+                    numStr1 = numStr1+ " " + s;
                 } else{
-                    numStr2 += s;
+                    numStr2 =numStr2+ " "+ s;
                 }
 
                 valor2 = words(numStr2);
