@@ -400,11 +400,16 @@ public class ProbaNum {
 
 
         if (s.contains("-i-")) {
-            res += 20;
+            //guardam el valor actual de res
+            long resTemp =res;
+            //el valor de res el posam a 20
+            res = 20;
+            // la unitat de la vintena
             String residuVint = s.substring(7);
-            //String[] residuVint = s.split("-i-");
-            //String arr20[] = residuVint.split("-");
+            //pasam a long la unitat i li suma a res que es 20
             res = unitatsEscrit(residuVint, 20);
+            //Amb el resultat que teniem antes li sumam el de la vintena.
+            res +=resTemp;
         } else if (s.equals("vint") || s.equals("trenta") || s.equals("quaranta") || s.equals("cinquanta") || s.equals("seixanta") || s.equals("setanta") || s.equals("vuitanta") || s.equals("noranta")) {
             res = desena(s);
         } else if (s.contains("-") && !s.contains("cents")) {
