@@ -468,39 +468,76 @@ public class NumbersCat {
         }
         return 0;
     }
-
     public static String oper(String s) { //La funció “oper” acceptarà un String on hi ha números representats amb paraules que
         //operen amb altres números. Tornarà un String on hi ha el número (amb paraules) que surt
         //en haver realitzat les operacions.
-        long numLong=0;
+        long numLong = 0;
         s = s.toLowerCase();
+
+        //String [] separaOp = {"menys","més","dividit","per"};
+        // String[] proba = s.split("menys |més|dividit|per");
+
+
+        // String[] partes = s.split("(menys |més|dividit|per)");
+
+
         String[] ar = s.split(" "); //separa per caracters
-        String primerValor ="";
+
+        //String primerValor = "";
         boolean numDespresDeOperador = false;
 
-        long valor1= 0;
-        long valor2 =1;
-        String oper ="";
+        long valor1 = 0;
+        long valor2 = 1;
+        String oper = "";
+        String numStr1 ="";
+        String numStr2 = "";
 
-        long result =0;
+        //boolean per determinar si ja hi ha els nombres
+        boolean llestPerOperar = false;
+        long result = 0;
+        //guarda el darrer element en el array
+        String darrerElementArray = ar[ar.length-1];
         for (int i = 0; i < ar.length; i++) {
-            s = ar[i];
 
+            s = ar[i];
+            /*oper = proba[i];
+            while (oper == s) {
+                s += ar[i+1];
+                System.out.println();
+            }
+
+             */
             if (s.equals("menys") || s.equals("més") || s.equals("dividit") || s.equals("per")) {
                 // si es un operador amb el proxim nombre se ha de operar
-                numDespresDeOperador=true;
+                numDespresDeOperador = true;
                 oper = s;
                 continue;
             } else {
-                valor2 = valor1;
-                valor1=words(s);
-            }
+                if (!numDespresDeOperador) { //si es un nombre que NO va despres de el operador
+                    System.out.println("ha entrat despres");
+                    numStr1 = numStr1+ " " + s;
+                } else {
+                    //si el valor  de numStr esta vuit
+                    numStr2 =numStr2+ " "+ s;
 
+
+                }
+                if (s!=darrerElementArray) {
+                    System.out.println("ultim " + s);
+                    continue;
+                }
+                valor2 = words(numStr2);
+                valor1 = words(numStr1);
+
+            }
             if (numDespresDeOperador) {
-                result =operacio(valor2,valor1,oper);
-                break;
+
+                result = operacio(valor1,valor2, oper);
+                numDespresDeOperador=false;
+                //break;
             }
         }
+
 
         //result= words(s);
         String resultatFinal = say(result);

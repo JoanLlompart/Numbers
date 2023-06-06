@@ -514,7 +514,10 @@ public class ProbaNum {
         //boolean per determinar si ja hi ha els nombres
         boolean llestPerOperar = false;
         long result = 0;
+        //guarda el darrer element en el array
+        String darrerElementArray = ar[ar.length-1];
         for (int i = 0; i < ar.length; i++) {
+
             s = ar[i];
             /*oper = proba[i];
             while (oper == s) {
@@ -533,25 +536,25 @@ public class ProbaNum {
                     System.out.println("ha entrat despres");
                     numStr1 = numStr1+ " " + s;
                 } else {
+                    //si el valor  de numStr esta vuit
                     numStr2 =numStr2+ " "+ s;
-                }
 
+
+                }
+                if (s!=darrerElementArray) {
+                    System.out.println("ultim " + s);
+                    continue;
+                }
                 valor2 = words(numStr2);
-                //valor1 = Long.parseLong(numStr1);
                 valor1 = words(numStr1);
 
-               // valor2 = valor1;
-               // valor1 = words(s);
             }
-
             if (numDespresDeOperador) {
 
                 result = operacio(valor1,valor2, oper);
                 numDespresDeOperador=false;
-                break;
+                //break;
             }
-
-
         }
 
 
@@ -568,16 +571,15 @@ public class ProbaNum {
                 break;
 
             case "més":
-                resultat = valor1 + valor2;
+                resultat = valor1+valor2;
                 break;
             case "dividit":
-                resultat = valor1 / valor2;
+                resultat = valor1/valor2;
 
                 break;
 
             case "per":
-                resultat = valor1 * valor2;
-
+                resultat = valor1*valor2;
                 break;
             default:
                 break;

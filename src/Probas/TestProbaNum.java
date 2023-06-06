@@ -175,15 +175,12 @@ public class TestProbaNum {
     @Test
     public void oper1() {
 
-       /* assertEquals("Dos", ProbaNum.oper("Un més un"));
+        assertEquals("Dos", ProbaNum.oper("Un més un"));
         assertEquals("Vint-i-tres", ProbaNum.oper("Cinc més divuit"));
         assertEquals("Quaranta-dos", ProbaNum.oper("Cinquanta-dos menys deu"));
         assertEquals("Cinquanta-quatre", ProbaNum.oper("Sis per nou"));
         assertEquals("Nou", ProbaNum.oper("Divuit dividit dos"));
         assertEquals("Vuit", ProbaNum.oper("Disset dividit dos"));
-        */
-
-
         assertEquals("Set-cents vint-i-dos mil quatre-cents quaranta-dos",
                 ProbaNum.oper("Set-cents vint-i-un per mil dos"));
         assertEquals("Setanta-sis milions cinc-cents seixanta-quatre mil quatre-cents cinquanta-quatre",
