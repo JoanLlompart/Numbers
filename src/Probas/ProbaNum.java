@@ -224,7 +224,7 @@ public class ProbaNum {
         boolean boolBilions = false;
         boolean booltrilió = false;
         boolean trilionsBool = false;
-
+        boolean stringNull = false;
         if (ar[0].equals("menys")) { //es negatiu si el primer caracter es menys.
             positiu = false;
             s = s.substring(6); //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
@@ -235,6 +235,10 @@ public class ProbaNum {
             for (int i = ar.length - 1; i >= 0; i--) {
                 s = ar[i];
                 // res = identificarWords(s, res);
+                if (s.equals("")) {
+                    stringNull=true;
+                    s = ar[i+1];
+                }
                 if (s.equals("mil")) {
                     milBoolean = true;
                     if (i == 0 && milionsBool == false) {
@@ -426,7 +430,6 @@ public class ProbaNum {
             resTemp *= 100;
             //se suma el resTemp amb el resultat general i la suma es el nou res
             res += resTemp;
-
         } else {
             //res += identificarWords(s, res);
             return res;
@@ -526,10 +529,10 @@ public class ProbaNum {
                 oper = s;
                 continue;
             } else {
-                if (!numDespresDeOperador) { //si es un nombre que va despres de el operador
+                if (!numDespresDeOperador) { //si es un nombre que NO va despres de el operador
                     System.out.println("ha entrat despres");
                     numStr1 = numStr1+ " " + s;
-                } else{
+                } else {
                     numStr2 =numStr2+ " "+ s;
                 }
 
@@ -542,6 +545,7 @@ public class ProbaNum {
             }
 
             if (numDespresDeOperador) {
+
                 result = operacio(valor1,valor2, oper);
                 numDespresDeOperador=false;
                 break;

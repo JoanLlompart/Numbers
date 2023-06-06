@@ -138,6 +138,7 @@ public class NumbersCatTest {
     @org.junit.Test
     public void revTest4() {
         assertEquals(1001, NumbersCat.words("Mil un"));
+        assertEquals(1000, NumbersCat.words("Mil"));
         assertEquals(2022, NumbersCat.words("Dos mil vint-i-dos"));
         assertEquals(99457, NumbersCat.words("Noranta-nou mil quatre-cents cinquanta-set"));
         assertEquals(100_000, NumbersCat.words("Cent mil"));
