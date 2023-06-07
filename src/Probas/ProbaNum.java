@@ -34,28 +34,41 @@ public class ProbaNum {
         resultat = capitalLetter(resultat);
         return resultat;
     }
-
+    // Funció per convertir un nombre en lletres
     private static String escriuLletres(long n) {
-        if (n == 0) return "Zero";
-        if (n < 10) {
+
+        if (n == 0) {
+            // Cas especial per zero
+            return "Zero";
+        } else if (n < 10) {
+            // Si el nombre és menor que 10, convertim en unitats
             return unitats(n);
         } else if (n < 20) {
+            // Si el nombre és menor que 20, utilitzem una llista predefinida per a nombres de 10 a 19
             return menorQueVint(n);
         } else if (n < 30) {
+            // Si el nombre és menor que 30, convertim en desenes a lletres
             return desenesALletres(n);
         } else if (n <= 99) {
+            // Si el nombre és menor o igual a 99, convertim en desenes a lletres
             return desenesALletres(n);
         } else if (n <= 999) {
+            // Si el nombre és menor o igual a 999, convertim en centenes
             return centenes(n);
         } else if (n <= 9999) {
+            // Si el nombre és menor o igual a 9999, convertim en milers
             return milers(n);
         } else if (n <= 999999) {
+            // Si el nombre és menor o igual a 999999, convertim en milers
             return milers(n);
         } else if (n <= 999_999_999_999L) {
+            // Si el nombre és menor o igual a 999999999999, convertim en milions
             return milions(n);
         } else if (n <= 999_999_999_999_999_999L) {
+            // Si el nombre és menor o igual a 999999999999999999, convertim en bilions
             return bilionsSay(n);
         } else {
+            // Per a nombres més grans, convertim en trilions que es els nombres mes grans que accepta el programa
             return trilions(n);
         }
     }
