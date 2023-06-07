@@ -198,17 +198,35 @@ public class ProbaNum {
     }
 
     private static String menor20(long n) {
+        // Si n es menor a deu es una unitat per tant pasa a la funcio de unitats.
         if (n < 10) return unitats(n);
-        if (n == 10) return "deu";
-        if (n == 11) return "onze";
-        if (n == 12) return "dotze";
-        if (n == 13) return "tretze";
-        if (n == 14) return "catorze";
-        if (n == 15) return "quinze";
-        if (n == 16) return "setze";
-        if (n == 17) return "disset";
-        if (n == 18) return "divuit";
-        if (n == 19) return "dinou";
+
+        //cast a (int) perque funcioni amb el switch
+        switch ((int) n) {
+            //pasa el int n a String de el numero escrit amb catala.
+            case 10:
+                return "deu";
+            case 11:
+                return "onze";
+            case 12:
+                return "dotze";
+            case 13:
+                return "tretze";
+            case 14:
+                return "catorze";
+            case 15:
+                return "quinze";
+            case 16:
+                return "setze";
+            case 17:
+                return "disset";
+            case 18:
+                return "divuit";
+            case 19:
+                return "dinou";
+            default:
+                break;
+        }
         return null;
     }
 
