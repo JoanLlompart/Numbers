@@ -15,16 +15,10 @@ public class ProbaNum {
 
         boolean positiu = true;
         if (0 > n) {
-            n = -n; //feim que el numero sigui positiu. li llevam el menys(-) (Funcio per nombres menors).
+            //feim que el numero sigui positiu. li llevam el menys(-) (Funcio per nombres menors).
+            n = -n;
             positiu = false;
         }
-/*
-        boolean negatiu = false;
-        if (n < 0) {
-            negatiu = true;
-            n = -n;
-        }
- */
 
         String resultat = escriuLletres(n);
         if (!positiu) {
@@ -80,9 +74,11 @@ public class ProbaNum {
         // Cas especial per 1 trilió
         if (n == 1_000_000_000_000_000_000L) {
             return "un trilió";
-        } else if (n >= 1_000_000_000_000_000_000L && n <= 1_999_999_999_999_999_999L) {
+        } else if (n > 1_000_000_000_000_000_000L && n <= 1_999_999_999_999_999_999L) {
+            //Major de un trilio i menor que 2 trilions.
             // Convertim la part trilió i la part bilions restants
             return "un trilió " + bilionsSay(n % 1_000_000_000_000_000_000L);
+
         } else if (n % 1_000_000_000_000_000_000L == 0) {
             // Convertim la part trilió, afegim "trilions", la part bilions restants i la part milions restants
             return bilionsSay(n / 1_000_000_000_000_000_000L) + " trilions" + bilionsSay(n % 1_000_000_000_000_000_000L) + milions(n % 100_000_000_000_000L);
@@ -234,10 +230,14 @@ public class ProbaNum {
         if (n == 20) return "vint";
 
         if (n < 30) {
+            //Nombres que estan a la vintena,excepte el vint
             return "vint" + "-i-" + unitats(n % 10);
         }
         if (n < 40) {
-            if (n == 30) return "trenta";
+            //Nombres que estan a la trentena
+            if (n == 30) {
+                return "trenta";
+            }
             return "trenta" + "-" + unitats(n % 10);
         }
         if (n < 50) {
