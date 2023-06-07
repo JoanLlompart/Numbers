@@ -12,15 +12,23 @@ public class ProbaNum {
 
 
     public static String say(long n) {
-        boolean negatiu = false;
 
+        boolean positiu = true;
+        if (0 > n) {
+            n = -n; //feim que el numero sigui positiu. li llevam el menys(-) (Funcio per nombres menors).
+            positiu = false;
+        }
+/*
+        boolean negatiu = false;
         if (n < 0) {
             negatiu = true;
             n = -n;
         }
+ */
 
         String resultat = escriuLletres(n);
-        if (negatiu) { //negatiu = true
+        if (!positiu) {
+            //si no es positiu, afegim un "Menys"
             resultat = "Menys " + resultat;
         }
         resultat = capitalLetter(resultat);
