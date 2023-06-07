@@ -29,7 +29,7 @@ public class ProbaNum {
         if (negatiu) { //negatiu = true
             resultat = "Menys " + resultat;
         }
-        resultat = capitalitzar(resultat);
+        resultat = capitalLetter(resultat);
         return resultat;
     }
 
@@ -190,11 +190,15 @@ public class ProbaNum {
         return "";
     }
 
-    private static String capitalitzar(String numero) {
-        char majuscula = numero.toUpperCase().charAt(0);
-        String restaNum = numero.substring(1);
-        numero = majuscula + restaNum;
-        return numero;
+
+    private static String capitalLetter(String mayuscula) {
+        //String que guarda la primera lletra per pasarla a majuscula
+        String primerLletra = mayuscula.substring(0, 1);
+        //pasa la lletra a majuscula i la guarda a primerMayuscula
+        String primerMayuscula = primerLletra.toUpperCase();
+        //Treu la primera lletra i en el return de abaix afageix en el seu lloc la lletra amb mayuscula
+        String noPrimeraLletra = mayuscula.substring(1, mayuscula.length());
+        return primerMayuscula + noPrimeraLletra;
     }
 
     private static String menor20(long n) {
