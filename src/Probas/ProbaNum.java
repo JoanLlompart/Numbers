@@ -1,11 +1,5 @@
 package Probas;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class ProbaNum {
         /*public static void main(String[] args) {
             Scanner scanner = new Scanner(System.in);
@@ -38,11 +32,11 @@ public class ProbaNum {
         if (n < 10) {
             return unitats(n);
         } else if (n < 20) {
-            return menor20(n);
+            return menorQueVint(n);
         } else if (n < 30) {
-            return desenes(n);
+            return desenesALletres(n);
         } else if (n <= 99) {
-            return desenes(n);
+            return desenesALletres(n);
         } else if (n <= 999) {
             return centenes(n);
         } else if (n <= 9999) {
@@ -98,7 +92,7 @@ public class ProbaNum {
     }
 
     private static String milers(long n) {
-        if (n < 100) return desenes(n);
+        if (n < 100) return desenesALletres(n);
         if (n < 1000) return centenes(n);
         if (n == 1000) return "mil";
         else if (n <= 1999) {
@@ -108,7 +102,7 @@ public class ProbaNum {
                 return unitats(n / 1000) + " mil" + centenes(n % 1000);
             } else return unitats(n / 1000) + " mil " + centenes(n % 1000);
         } else if (n < 99999) {
-            return desenes(n / 1000) + " mil " + centenes(n % 1000);
+            return desenesALletres(n / 1000) + " mil " + centenes(n % 1000);
         } else if (n > 99999 && n <= 999999) {
             if (n % 10000 == 0) {
                 return centenes(n / 1000) + " mil" + centenes(n % 1000);
@@ -123,39 +117,61 @@ public class ProbaNum {
 
     private static String centenes(long n) {
         if (n < 10) return unitats(n);
-        if (n < 100) return desenes(n);
+        if (n < 100) return desenesALletres(n);
         if (n == 100) return "cent";
         if (n < 200) {
-            return "cent " + desenes(n % 100);
+            return "cent " + desenesALletres(n % 100);
         }
         if (n < 1000) {
             if (n % 100 == 0) {
-                return unitats(n / 100) + "-cents" + desenes(n % 100);
-            } else return unitats(n / 100) + "-cents " + desenes(n % 100);
+                return unitats(n / 100) + "-cents" + desenesALletres(n % 100);
+            } else return unitats(n / 100) + "-cents " + desenesALletres(n % 100);
         }
-
+        //si hi ha un error i no coincideix amb cap opcio torna un String buit
         return "";
     }
 
     private static String unitats(long n) {
-        if (n == 1) return "un";
-        if (n == 2) return "dos";
-        if (n == 3) return "tres";
-        if (n == 4) return "quatre";
-        if (n == 5) return "cinc";
-        if (n == 6) return "sis";
-        if (n == 7) return "set";
-        if (n == 8) return "vuit";
-        if (n == 9) return "nou";
-        return "";
+
+        //cast a (int) perque funcioni amb el switch
+        switch ((int) n) {
+            //pasa el int n a String de el numero escrit amb catala.
+            //cada case fa un return de na unitat a la que correspon
+            case 1:
+                return "un";
+            case 2:
+                return "dos";
+            case 3:
+                return "tres";
+            case 4:
+                return "quatre";
+            case 5:
+                return "cinc";
+            case 6:
+                return "sis";
+            case 7:
+                return "set";
+            case 8:
+                return "vuit";
+            case 9:
+                return "nou";
+            default:
+                //si hi ha un error i no coincideix amb cap opcio torna un String buit
+                return "";
+        }
+
     }
 
-    private static String desenes(long n) {
+    private static String desenesALletres(long n) {
+        //Menor a 10 envia a funcio de unitats
         if (n < 10) return unitats(n);
         if (n < 20) {
-            return menor20(n);
+            //Si es mes petit que 20 el pasam a la funcio menor20().
+            return menorQueVint(n);
         }
+        //si es el nombre 20 nomes torna "vint" sense pasar per una funcio
         if (n == 20) return "vint";
+
         if (n < 30) {
             return "vint" + "-i-" + unitats(n % 10);
         }
@@ -201,7 +217,7 @@ public class ProbaNum {
         return primerMayuscula + noPrimeraLletra;
     }
 
-    private static String menor20(long n) {
+    private static String menorQueVint(long n) {
         // Si n es menor a deu es una unitat per tant pasa a la funcio de unitats.
         if (n < 10) return unitats(n);
 
