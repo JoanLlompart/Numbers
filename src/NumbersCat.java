@@ -40,6 +40,7 @@ public class NumbersCat {
         resultat = capitalLetter(resultat);
         return resultat;
     }
+
     // Funció per convertir un nombre en lletres
     private static String escriuLletres(long n) {
 
@@ -344,11 +345,13 @@ public class NumbersCat {
     }
 
 
-    public static long words(String s) {// La funció “words” fa l’operació inversa: transforma un String en un número de tipus long.
+    public static long words(String s) {
+        // La funció “words” fa l’operació inversa: transforma un String en un número de tipus long.
         s = s.toLowerCase();
-        String[] ar = s.split(" "); //separa per caracters
-
+        //separa per caracters
+        String[] ar = s.split(" ");
         long res = 0;
+
         boolean positiu = true;
         boolean milBoolean = false;
         boolean milioBoolean = false;
@@ -419,7 +422,6 @@ public class NumbersCat {
                     continue;
                 } else if (s.equals("trilions")) {
                     // Desactiva els booleans de els mil,milions
-
                     milionsBool= false;
                     milBoolean = false;
                     bilioBool=false;
@@ -504,7 +506,8 @@ public class NumbersCat {
         }
 
         if (positiu == false) {
-            res = -res; //Si es negatiu pasam el positiu a negatiu.
+            //Si es negatiu pasam el positiu a negatiu.
+            res = -res;
         }
 
         return res;
@@ -527,7 +530,6 @@ public class NumbersCat {
             case "mil":
                 res += 1000;
             default:
-               // System.err.println("Falta implementar, el valor que falla es " + s);
                 break;
         }
 
@@ -543,27 +545,31 @@ public class NumbersCat {
             res = unitatsEscrit(residuVint, 20);
             //Amb el resultat que teniem antes li sumam el de la vintena.
             res +=resTemp;
-        } else if (s.equals("vint") || s.equals("trenta") || s.equals("quaranta") || s.equals("cinquanta") || s.equals("seixanta") || s.equals("setanta") || s.equals("vuitanta") || s.equals("noranta")) {
+        } else if (s.equals("vint") || s.equals("trenta") || s.equals("quaranta") || s.equals("cinquanta") ||
+                s.equals("seixanta") || s.equals("setanta") || s.equals("vuitanta") || s.equals("noranta")) {
             res = desena(s);
         } else if (s.contains("-") && !s.contains("cents")) {
             //valors menors de 100
             String[] separaMenorCent = s.split("-");
             // agafa la desena i la unitat
-            res =desena(separaMenorCent[separaMenorCent.length - 2]) + unitatsEscrit(separaMenorCent[separaMenorCent.length - 1], res);
+            res =desena(separaMenorCent[separaMenorCent.length - 2]) +
+                    unitatsEscrit(separaMenorCent[separaMenorCent.length - 1], res);
+
         } else if (s.contains("cents")) {
             String[] centsSepara = s.split("-");
             //Variable temporal per guardar la centena
             long resTemp =0;
-            resTemp = unitatsEscrit(centsSepara[centsSepara.length - 2], resTemp);//TODO: ALERTA ANTES ESTABA AMB += (POSIBLE FALLO FUTUR HEM DE CONTROLAR)
+            resTemp = unitatsEscrit(centsSepara[centsSepara.length - 2], resTemp);
             //la unitat de la centena se multiplica per cent per convertirse en centena.
             resTemp *=100;
             //se suma el resTemp amb el resultat general i la suma es el nou res
             res += resTemp;
 
         } else {
-            //res += identificarWords(s, res);
-            long resTemp = res; //guarda el resultat de antes de arribar a mil, de dreta a esquerra
-            res = 0; //per poder multiplicar per mil el següent nombre
+            //guarda el resultat de antes de arribar a mil, de dreta a esquerra
+            long resTemp = res;
+            //per poder multiplicar per mil el següent nombre
+            res = 0;
             res +=resTemp;
 
             return res;
@@ -623,19 +629,11 @@ public class NumbersCat {
     public static String oper(String s) { //La funció “oper” acceptarà un String on hi ha números representats amb paraules que
         //operen amb altres números. Tornarà un String on hi ha el número (amb paraules) que surt
         //en haver realitzat les operacions.
-        long numLong = 0;
+
         s = s.toLowerCase();
+        //separa per caracters
+        String[] ar = s.split(" ");
 
-        //String [] separaOp = {"menys","més","dividit","per"};
-        // String[] proba = s.split("menys |més|dividit|per");
-
-
-        // String[] partes = s.split("(menys |més|dividit|per)");
-
-
-        String[] ar = s.split(" "); //separa per caracters
-
-        //String primerValor = "";
         boolean numDespresDeOperador = false;
 
         long valor1 = 0;
@@ -652,13 +650,6 @@ public class NumbersCat {
         for (int i = 0; i < ar.length; i++) {
 
             s = ar[i];
-            /*oper = proba[i];
-            while (oper == s) {
-                s += ar[i+1];
-                System.out.println();
-            }
-
-             */
             if (s.equals("menys") || s.equals("més") || s.equals("dividit") || s.equals("per")) {
                 // si es un operador amb el proxim nombre se ha de operar
                 numDespresDeOperador = true;
