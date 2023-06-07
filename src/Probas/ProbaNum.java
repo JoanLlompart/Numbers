@@ -19,6 +19,7 @@ public class ProbaNum {
 
     public static String say(long n) {
         boolean negatiu = false;
+
         if (n < 0) {
             negatiu = true;
             n = -n;
