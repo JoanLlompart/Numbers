@@ -229,41 +229,60 @@ public class ProbaNum {
         //si es el nombre 20 nomes torna "vint" sense pasar per una funcio
         if (n == 20) return "vint";
 
+        //Nombres que estan a la vintena,excepte el vint
         if (n < 30) {
-            //Nombres que estan a la vintena,excepte el vint
             return "vint" + "-i-" + unitats(n % 10);
         }
+        //Nombres que estan a la trentena
         if (n < 40) {
-            //Nombres que estan a la trentena
             if (n == 30) {
+                //si es 30
                 return "trenta";
             }
+            //si no es just trenta escrivim trenta un guio i la unitat
             return "trenta" + "-" + unitats(n % 10);
         }
+        //Nombres que estan a la quarantena
         if (n < 50) {
+            //cas de 40
             if (n == 40) return "quaranta";
+            //si no es just quaranta escrivim quaranta un guio i la unitat
             return "quaranta" + "-" + unitats(n % 10);
         }
+        //Nombres que estan a la cinquantena
         if (n < 60) {
+            //cas de 50
             if (n == 50) return "cinquanta";
+            //si no es just cinquanta escrivim cinquantena un guio i la unitat
             return "cinquanta" + "-" + unitats(n % 10);
         }
+
+        //Nombres que estan a la seixantena
         if (n < 70) {
             if (n == 60) return "seixanta";
+            //si no es just seixanta escrivim seixantena un guio i la unitat
             return "seixanta" + "-" + unitats(n % 10);
         }
+        //Nombres que estan a la setantena
         if (n < 80) {
+            //cas de 70
             if (n == 70) return "setanta";
+            //si no es just setanta escrivim setanta un guio i la unitat
             return "setanta" + "-" + unitats(n % 10);
         }
+        //Nombres que estan a la vuitantena
         if (n < 90) {
             if (n == 80) return "vuitanta";
+            //si no es just vuitanta escrivim vuitanta un guio i la unitat
             return "vuitanta" + "-" + unitats(n % 10);
         }
+        //Nombres que estan a la norantena
         if (n < 100) {
             if (n == 90) return "noranta";
+            //si no es just noranta escrivim noranta un guio i la unitat
             return "noranta" + "-" + unitats(n % 10);
         }
+        //En cas de que no es doni cap cas retorna un String buit.
         return "";
     }
 
@@ -308,7 +327,8 @@ public class ProbaNum {
             default:
                 break;
         }
-        return null;
+        //En cas de que no es doni cap cas retorna un String buit.
+        return "";
     }
 
     public static long words(String s) {// La funció “words” fa l’operació inversa: transforma un String en un número de tipus long.
@@ -539,7 +559,6 @@ public class ProbaNum {
     }
 
     private static long unitatsEscrit(String s, long res) {
-
         switch (s) {
             case "zero" -> res += 0;
             case "un" -> res += 1;
@@ -669,7 +688,6 @@ public class ProbaNum {
             case "menys":
                 resultat = valor1 - valor2;
                 break;
-
             case "més":
                 resultat = valor1+valor2;
                 break;
@@ -677,7 +695,6 @@ public class ProbaNum {
                 resultat = valor1/valor2;
 
                 break;
-
             case "per":
                 resultat = valor1*valor2;
                 break;
