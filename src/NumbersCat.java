@@ -637,7 +637,7 @@ public class NumbersCat {
         boolean numDespresDeOperador = false;
 
         long valor1 = 0;
-        long valor2 = 1;
+        long valor2 = 0;
         String oper = "";
         String numStr1 ="";
         String numStr2 = "";
@@ -656,35 +656,33 @@ public class NumbersCat {
                 oper = s;
                 continue;
             } else {
-                if (!numDespresDeOperador) { //si es un nombre que NO va despres de el operador
+                //si es un nombre que NO va despres de el operador
+                if (!numDespresDeOperador) {
                     System.out.println("ha entrat despres");
                     numStr1 = numStr1+ " " + s;
                 } else {
                     //si el valor  de numStr esta vuit
                     numStr2 =numStr2+ " "+ s;
-
-
                 }
                 if (s!=darrerElementArray) {
                     System.out.println("ultim " + s);
                     continue;
                 }
+                //asigna a valor2 el valor de String numStr2
                 valor2 = words(numStr2);
+                //asigna a valor1 el valor de String numStr1
                 valor1 = words(numStr1);
-
             }
+            //si es un numero mes que va despres de un operador se realitza la operacio
             if (numDespresDeOperador) {
-
                 result = operacio(valor1,valor2, oper);
+                //tornam a false el boolea de el numDespresDeOperador
                 numDespresDeOperador=false;
                 //break;
             }
         }
 
-
-        //result= words(s);
-        String resultatFinal = say(result);
-        return resultatFinal;
+        return say(result);
     }
 
     private static long operacio(long valor1,long valor2,String oper) {
@@ -693,18 +691,14 @@ public class NumbersCat {
             case "menys":
                 resultat= valor1 - valor2;
                 break;
-
             case "més":
                 resultat= valor1 + valor2;
                 break;
             case "dividit":
                 resultat= valor1/valor2;
-
                 break;
-
             case "per":
                 resultat= valor1 * valor2;
-
                 break;
             default:
                 break;
