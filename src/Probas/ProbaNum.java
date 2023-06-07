@@ -611,17 +611,7 @@ public class ProbaNum {
         //en haver realitzat les operacions.
         long numLong = 0;
         s = s.toLowerCase();
-
-        //String [] separaOp = {"menys","més","dividit","per"};
-       // String[] proba = s.split("menys |més|dividit|per");
-
-
-       // String[] partes = s.split("(menys |més|dividit|per)");
-
-
         String[] ar = s.split(" "); //separa per caracters
-
-        //String primerValor = "";
         boolean numDespresDeOperador = false;
 
         long valor1 = 0;
@@ -636,15 +626,7 @@ public class ProbaNum {
         //guarda el darrer element en el array
         String darrerElementArray = ar[ar.length-1];
         for (int i = 0; i < ar.length; i++) {
-
             s = ar[i];
-            /*oper = proba[i];
-            while (oper == s) {
-                s += ar[i+1];
-                System.out.println();
-            }
-
-             */
             if (s.equals("menys") || s.equals("més") || s.equals("dividit") || s.equals("per")) {
                 // si es un operador amb el proxim nombre se ha de operar
                 numDespresDeOperador = true;
@@ -657,8 +639,6 @@ public class ProbaNum {
                 } else {
                     //si el valor  de numStr esta vuit
                     numStr2 =numStr2+ " "+ s;
-
-
                 }
                 if (s!=darrerElementArray) {
                     System.out.println("ultim " + s);

@@ -24,173 +24,325 @@ public class NumbersCat {
 
     }
     public static String say(long n) {
-        //La funció “say” acceptarà un paràmetre de tipus “long” i tornarà un String amb les paraules
-        //en català corresponents al número que li hem passat.
 
-        String[] desena = {"", "deu", "vint", "trenta", "quaranta", "cinquanta", "seixanta", "setanta", "vuitanta", "noranta"};//desenas
-        String[] unicNums = {"zero", "un", "dos", "tres", "quatre",
-                "cinc", "sis", "set", "vuit", "nou", "deu", "onze", "dotze", "tretze", "catorze", "quinze", "setze", "disset", "divuit",
-                "dinou"};
-        String result = "";
         boolean positiu = true;
         if (0 > n) {
-            n = -n; //feim que el numero sigui positiu. li llevam el menys(-) (Funcio per nombres menors).
+            //feim que el numero sigui positiu. li llevam el menys(-) (Funcio per nombres menors).
+            n = -n;
             positiu = false;
         }
-        //Variables de unitats
-        int milio = (int) (n / 1000000); // milio
-        int restaMilio = (int) (n % 1000000); // restaMilio
-        int milena = (restaMilio / 1000);//agafa la primera centena.
-        int restaMil = (restaMilio % 1000); //guarda el residu es a dir la resta de numeros.
-        int cente = (restaMil / 100);//agafa la primera centena.
-        int restaCent = (restaMil % 100); //guarda el residu es a dir la resta de numeros.
-        int dec = (restaCent / 10);//agafa la primera decena.
-        int uni = (restaCent % 10); //guarda el residu es a dir la resta de numeros.
-        int uniMil = milena % 10; //per a la milena no giri els nombres residu de decMil
-        int decMil = milena / 10; // EX: 21000 --> 2 decMil i 1 uniMil.
 
-        if (n >= 0 && n < 100) {
-            result = finsA100(n, unicNums, uni, desena, dec);
+        String resultat = escriuLletres(n);
+        if (!positiu) {
+            //si no es positiu, afegim un "Menys"
+            resultat = "Menys " + resultat;
         }
-        //Numeros del 100 al 999.
-        if (n > 99 && n < 1000) { //Funcio menys de mil
-            result = menysDeMil(n, desena, dec, unicNums, uni, restaCent, cente);
-        }
-
-        //Menys de 1 milio.
-        if (n > 999 && n < 1000000) {
-            result = menysDeMilio(n, desena, dec, unicNums, uni, restaCent, cente, restaMil, milena, decMil, uniMil);
-        }
-
-        if (positiu == false) {
-            result = "Menys " + result.toLowerCase();
-        }
-        return result;
+        resultat = capitalLetter(resultat);
+        return resultat;
     }
+    // Funció per convertir un nombre en lletres
+    private static String escriuLletres(long n) {
 
-    private static String finsA100(long n, String[] unicNums, int uni, String[] desena, int dec) {
-        String resultFins100 = "";
-        if (n < 20) {
-            resultFins100 = menorQueVint(n, unicNums);
-        }
-        if (n > 19 && n < 100) {
-            if (uni == 0) {
-                return capitalLetter(desena[dec]); //Num fora unitats
-            }
-            if (n < 30) { //el minim ja no fa falta el especifiquem ja que esta fet en el primer if
-                resultFins100 = vintena(desena, dec, unicNums, uni);
-            } else { //De 30 a 99
-                resultFins100 = menysDe100(desena, dec, unicNums, uni);
-            }
-        }
-        return resultFins100;
-    }
-    private static String menysDeMilio(long n, String[] desena, int dec, String[] unicNums, int uni, int restaCent, int cente, int restaMil, int milena, int decMil, int uniMil) {
-        String miler = "mil";
-        String resultMenysDeMilio = "";
-
-        if (restaMil == 0) {
-            resultMenysDeMilio = capitalLetter(miler);
-        } else if (n > 1000 && n < 2000) {
-            if (restaMil < 20) { // de 1001 a 1019.
-                resultMenysDeMilio = capitalLetter(miler) + " " + unicNums[restaMil].toLowerCase(); //de 1001 a 1019.
-            } else if (restaMil > 19 && restaMil < 30) { // 1020 a 1029
-                resultMenysDeMilio = capitalLetter(miler) + " " + vintena(desena, dec, unicNums, uni).toLowerCase();
-            } else if (restaMil > 29 && restaMil < 100) { //majors de 1029 i maxim 1099.
-                resultMenysDeMilio = capitalLetter(miler) + " " + menysDe100(desena, dec, unicNums, uni).toLowerCase();
-            } else if (restaMil > 99 && restaMil < 1000) { // de 1099 a 1999
-                resultMenysDeMilio = capitalLetter(miler) + " " + menysDeMil(restaMil, desena, dec, unicNums, uni, restaCent, cente).toLowerCase();
-            }
-        }
-        if (milena > 1 && milena < 20) {
-            //fer milenas
-            if (restaMil == 0) { //antes restamil
-                resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler;
-            } else if (restaMil < 100) { //Si el restaMil no es zero, de 1001 a 19999
-                resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
-            } else if (restaMil > 99 && restaMil < 1000) { // de 1099 a 1999
-                resultMenysDeMilio = capitalLetter(unicNums[milena]) + " " + miler + " " + menysDeMil(restaMil, desena, dec, unicNums, uni, restaCent, cente).toLowerCase();
-            }
-        } else if (milena > 19 && milena < 100) { //prova 1000
-            if (restaMil == 0) {
-                resultMenysDeMilio = capitalLetter(finsA100(milena, unicNums, uniMil, desena, decMil)) + " " + miler;
-            } else if (restaMil < 100) { //Noranta-nou mil nou-cents noranta
-                resultMenysDeMilio = capitalLetter(finsA100(milena, unicNums, uniMil, desena, decMil)) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
-            } else if (restaMil < 1000) {
-                resultMenysDeMilio = capitalLetter(finsA100(milena, unicNums, uniMil, desena, decMil)) + " " + miler + " " + menysDeMil(restaMil, desena, dec, unicNums, uni, restaCent, cente).toLowerCase();
-            }
-        } else if (milena > 99 && milena < 1000) {
-            if (restaMil == 0) { //milena mes  gran a 100 i sense centenes.
-                resultMenysDeMilio = capitalLetter(menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente)) + " " + miler;
-            } else if (restaMil < 100) {
-                resultMenysDeMilio = capitalLetter(menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente)) + " " + miler + " " + finsA100(restaMil, unicNums, uni, desena, dec).toLowerCase();
-            } else if (restaMil < 1000) {
-                resultMenysDeMilio = capitalLetter(menysDeMil(milena, desena, decMil, unicNums, uniMil, restaCent, cente)) + " " + miler + " " + menysDeMil(restaMil, desena, dec, unicNums, uni, restaCent, cente).toLowerCase();
-            }
-        }
-
-        return resultMenysDeMilio;
-    }
-
-    private static String menysDeMil(long n, String[] desena, int dec, String[] unicNums, int uni, int restaCent, int cente) {
-        String[] centenas = {"", "cent", "dos-cents", "tres-cents", "quatre-cents", "cinc-cents", "sis-cents", "set-cents", "vuit-cents", "nou-cents"};
-        String resultCent = "";
-
-        if (restaCent == 0) {
-            resultCent = capitalLetter(centenas[cente]); //falta el doscents
-        } else if (n > 99 && n < 1000) {
-            if (uni == 0) { //Les decenas sense unitats.Ex : 20,30,40,50,etc
-                resultCent = capitalLetter(centenas[cente]) + " " + desena[dec];
-            }
-            if (n > 100 && n < 120) {
-                resultCent = capitalLetter(centenas[cente]) + " " + unicNums[restaCent].toLowerCase(); //Funciona fins a 109. A partir de alla falla.
-            }
-            if (n > 119 && n < 130) {
-                resultCent = capitalLetter(centenas[cente]) + " " + vintena(desena, dec, unicNums, uni).toLowerCase(); // els nombres que tenguin resta cent entre la vintena entrara a la funcio
-                // i li hem pasat els parametres que necesita per retornar la vintena.
-            }
-            if (n > 130 && n < 200) {
-                resultCent = capitalLetter(centenas[cente]) + " " + menysDe100(desena, dec, unicNums, uni).toLowerCase(); //Funciona fins a 109. A partir de alla falla.
-            }
-            if (n > 199 && n < 1000) { //Valors majors o iguals a 200 fins a 999.
-                if (restaCent < 20) //Agafam la decena Restacent.
-                    resultCent = capitalLetter(centenas[cente]) + " " + unicNums[restaCent].toLowerCase();
-                else if (restaCent < 30) { //Si es menys de 30 la decena cridam i feim us de la funcio vintena i li pasam tots els parametres que necesita.
-                    resultCent = capitalLetter(centenas[cente]) + " " + vintena(desena, dec, unicNums, uni).toLowerCase();
-                } else { //els nums de 30 o mes decenas
-                    resultCent = capitalLetter(centenas[cente]) + " " + menysDe100(desena, dec, unicNums, uni).toLowerCase();
-                }
-            }
-        }
-        return resultCent;
-    }
-
-    private static String menysDe100(String[] desena, int dec, String[] unicNums, int uni) { //de 30 fins a 99
-        if (uni == 0) { //Perque no torni un zero a les decenes si unitat es 0 escriu nomes la decena.
-            return capitalLetter(desena[dec]);
-        } else { //Si te unitats escriu la decena - unitat
-            return capitalLetter(desena[dec]) + "-" + unicNums[uni].toLowerCase();
-        }
-    }
-
-    private static String vintena(String[] desena, int dec, String[] unicNums, int uni) { //Escriu els nombres de 20 a 29.
-        if (uni == 0) {
-            return capitalLetter(desena[dec]);
+        if (n == 0) {
+            // Cas especial per zero
+            return "Zero";
+        } else if (n < 10) {
+            // Si el nombre és menor que 10, convertim en unitats
+            return unitats(n);
+        } else if (n < 20) {
+            // Si el nombre és menor que 20, utilitzem una llista predefinida per a nombres de 10 a 19
+            return menorQueVint(n);
+        } else if (n < 30) {
+            // Si el nombre és menor que 30, convertim en desenes a lletres
+            return desenesALletres(n);
+        } else if (n <= 99) {
+            // Si el nombre és menor o igual a 99, convertim en desenes a lletres
+            return desenesALletres(n);
+        } else if (n <= 999) {
+            // Si el nombre és menor o igual a 999, convertim en centenes
+            return centenes(n);
+        } else if (n <= 9999) {
+            // Si el nombre és menor o igual a 9999, convertim en milers
+            return milers(n);
+        } else if (n <= 999999) {
+            // Si el nombre és menor o igual a 999999, convertim en milers
+            return milers(n);
+        } else if (n <= 999_999_999_999L) {
+            // Si el nombre és menor o igual a 999999999999, convertim en milions
+            return milions(n);
+        } else if (n <= 999_999_999_999_999_999L) {
+            // Si el nombre és menor o igual a 999999999999999999, convertim en bilions
+            return bilionsSay(n);
         } else {
-            return capitalLetter(desena[dec]) + "-i-" + unicNums[uni].toLowerCase();
+            // Per a nombres més grans, convertim en trilions que es els nombres mes grans que accepta el programa
+            return trilions(n);
         }
     }
 
-    private static String menorQueVint(long n, String[] unicNums) { //Menor
-        return capitalLetter(unicNums[(int) n]);
+    // Funció per convertir nombres fins a un trilió
+    private static String trilions(long n) {
+        // Si el nombre és menor que un trilió, convertim en bilions
+        if (n < 999_999_999_999_999_999L) return bilionsSay(n);
+        // Cas especial per 1 trilió
+        if (n == 1_000_000_000_000_000_000L) {
+            return "un trilió";
+        } else if (n > 1_000_000_000_000_000_000L && n <= 1_999_999_999_999_999_999L) {
+            //Major de un trilio i menor que 2 trilions.
+            // Convertim la part trilió i la part bilions restants
+            return "un trilió " + bilionsSay(n % 1_000_000_000_000_000_000L);
+
+        } else if (n % 1_000_000_000_000_000_000L == 0) {
+            // Convertim la part trilió, afegim "trilions", la part bilions restants i la part milions restants
+            return bilionsSay(n / 1_000_000_000_000_000_000L) + " trilions" + bilionsSay(n % 1_000_000_000_000_000_000L) + milions(n % 100_000_000_000_000L);
+
+        } else if (n >= 2_000_000_000_000_000_000L) {
+            return bilionsSay(n / 1_000_000_000_000_000_000L) + " trilions " + bilionsSay(n % 1_000_000_000_000_000_000L) + milions(n % 10_000_000_000_000L);
+            // Convertim la part trilió, afegim "trilions", la part bilions restants i la part milions restants
+        }
+        return "";
     }
+    private static String bilionsSay(long n) {
+        if (n < 999_999_999_999L) {
+            // Si el nombre és menor a 999999999999, convertim en milions
+            return milions(n);
+        } else if (n == 1_000_000_000_000L) {
+            // Cas especial per a 1000000000000
+            return "un bilió";
+        } else if (n >= 1_000_000_000_000L && n <= 1_999_999_999_999L) {
+            // Convertim la part del bilió i cridem a la funció milions per a la resta
+            return "un bilió " + milions(n % 1_000_000_000_000L);
+        } else if (n % 1_000_000_000_000L == 0) {
+            // Convertim la part del bilió, cridem a la funció milions per a la resta i cridem a la funció milers per a la part en milers
+            return milions(n / 1_000_000_000_000L) + " bilions" +
+                    milions(n % 1_000_000_000_000L) + milers(n % 100_000_000);
+
+        } else if (n >= 2_000_000_000_000L && n <= 999_999_999_999_999_999L) {
+            // Convertim la part del bilió, cridem a la funció milions per a la resta i
+            // cridem a la funció milers per a la part en milers
+            return milions(n / 1_000_000_000_000L) + " bilions " + milions(n % 1_000_000_000_000L) +
+                    milers(n % 10_000_000L);
+        }
+        return "";
+    }
+    private static String milions(long n) {
+        if (n < 999999) {
+            // Si el nombre és menor a 999999, convertim en milers
+            return milers(n);
+        } else if (n == 1_000_000) {
+            // Cas especial per a 1000000
+            return "un milió";
+        } else if (n >= 1_000_000 && n <= 1_999_999L) {
+            // Convertim la part del milió i cridem a la funció milers per a la resta
+            return "un milió " + milers(n % 1_000_000);
+        } else if (n % 1_000_000 == 0) {
+            // Convertim la part del milió, cridem a la funció milers per a la resta i
+            // cridem a la funció centenes per a la part en centenes
+            return milers(n / 1_000_000) + " milions" + milers(n % 1_000_000) + centenes(n % 10_000_000);
+        } else if (n >= 2_000_000 && n <= 999_999_999_999L) {
+            // Convertim la part del milió, cridem a la funció milers per a la resta
+            // i cridem a la funció centenes per a la part en centenes
+            return milers(n / 1_000_000) + " milions " + milers(n % 1_000_000) + centenes(n % 10_000_000);
+        }
+        return "";
+    }
+
+
+    // Funció per convertir nombres fins a milers
+    private static String milers(long n) {
+        // Si el nombre és menor que 100, convertim en desenes a lletres
+        if (n < 100) return desenesALletres(n);
+        // Si el nombre és menor que 1000, convertim en centenes pasant "n" a la funció centenes
+        if (n < 1000) return centenes(n);
+        // Cas especial per 1000, ja que si es mes de mil se
+        if (n == 1000) {
+            return "mil";
+        } else if (n <= 1999) {
+            //Menor o igual a 1999
+            // Convertim la part mil i la part centenes restants
+            return "mil " + centenes(n % 1000);
+        } else if (n <= 9999) {
+            //Menor o igual a 9 999
+            if (n % 1000 == 0) {
+                // Convertim la part mil, afegim "mil", la part centenes restants
+                return unitats(n / 1000) + " mil" + centenes(n % 1000);
+            } else {
+                // Convertim la part mil, afegim "mil", la part centenes restants
+                return unitats(n / 1000) + " mil " + centenes(n % 1000);
+            }
+        } else if (n < 99_999) {
+            // Convertim la part desenes a lletres, afegim "mil", la part centenes restants
+            return desenesALletres(n / 1000) + " mil " + centenes(n % 1000);
+        } else if (n > 99_999 && n <= 99_9999) {
+            if (n % 10_000 == 0 || n % 1000 == 0) {
+                // Convertim la part centenes, afegim "mil", la part centenes restants
+                return centenes(n / 1000) + " mil" + centenes(n % 1000);
+            } else {
+                // Convertim la part centenes, afegim "mil", la part centenes restants
+                return centenes(n / 1000) + " mil " + centenes(n % 1000);
+            }
+        }
+        return "";
+    }
+
+    private static String centenes(long n) {
+        if (n < 10) return unitats(n);
+        if (n < 100) return desenesALletres(n);
+        if (n == 100) return "cent";
+        if (n < 200) {
+            return "cent " + desenesALletres(n % 100);
+        }
+        if (n < 1000) {
+            if (n % 100 == 0) {
+                return unitats(n / 100) + "-cents" + desenesALletres(n % 100);
+            } else return unitats(n / 100) + "-cents " + desenesALletres(n % 100);
+        }
+        //si hi ha un error i no coincideix amb cap opcio torna un String buit
+        return "";
+    }
+
+    private static String unitats(long n) {
+
+        //cast a (int) perque funcioni amb el switch
+        switch ((int) n) {
+            //pasa el int n a String de el numero escrit amb catala.
+            //cada case fa un return de na unitat a la que correspon
+            case 1:
+                return "un";
+            case 2:
+                return "dos";
+            case 3:
+                return "tres";
+            case 4:
+                return "quatre";
+            case 5:
+                return "cinc";
+            case 6:
+                return "sis";
+            case 7:
+                return "set";
+            case 8:
+                return "vuit";
+            case 9:
+                return "nou";
+            default:
+                //si hi ha un error i no coincideix amb cap opcio torna un String buit
+                return "";
+        }
+
+    }
+
+    private static String desenesALletres(long n) {
+        //Menor a 10 envia a funcio de unitats
+        if (n < 10) return unitats(n);
+        if (n < 20) {
+            //Si es mes petit que 20 el pasam a la funcio menor20().
+            return menorQueVint(n);
+        }
+        //si es el nombre 20 nomes torna "vint" sense pasar per una funcio
+        if (n == 20) return "vint";
+
+        //Nombres que estan a la vintena,excepte el vint
+        if (n < 30) {
+            return "vint" + "-i-" + unitats(n % 10);
+        }
+        //Nombres que estan a la trentena
+        if (n < 40) {
+            if (n == 30) {
+                //si es 30
+                return "trenta";
+            }
+            //si no es just trenta escrivim trenta un guio i la unitat
+            return "trenta" + "-" + unitats(n % 10);
+        }
+        //Nombres que estan a la quarantena
+        if (n < 50) {
+            //cas de 40
+            if (n == 40) return "quaranta";
+            //si no es just quaranta escrivim quaranta un guio i la unitat
+            return "quaranta" + "-" + unitats(n % 10);
+        }
+        //Nombres que estan a la cinquantena
+        if (n < 60) {
+            //cas de 50
+            if (n == 50) return "cinquanta";
+            //si no es just cinquanta escrivim cinquantena un guio i la unitat
+            return "cinquanta" + "-" + unitats(n % 10);
+        }
+
+        //Nombres que estan a la seixantena
+        if (n < 70) {
+            if (n == 60) return "seixanta";
+            //si no es just seixanta escrivim seixantena un guio i la unitat
+            return "seixanta" + "-" + unitats(n % 10);
+        }
+        //Nombres que estan a la setantena
+        if (n < 80) {
+            //cas de 70
+            if (n == 70) return "setanta";
+            //si no es just setanta escrivim setanta un guio i la unitat
+            return "setanta" + "-" + unitats(n % 10);
+        }
+        //Nombres que estan a la vuitantena
+        if (n < 90) {
+            if (n == 80) return "vuitanta";
+            //si no es just vuitanta escrivim vuitanta un guio i la unitat
+            return "vuitanta" + "-" + unitats(n % 10);
+        }
+        //Nombres que estan a la norantena
+        if (n < 100) {
+            if (n == 90) return "noranta";
+            //si no es just noranta escrivim noranta un guio i la unitat
+            return "noranta" + "-" + unitats(n % 10);
+        }
+        //En cas de que no es doni cap cas retorna un String buit.
+        return "";
+    }
+
 
     private static String capitalLetter(String mayuscula) {
+        //String que guarda la primera lletra per pasarla a majuscula
         String primerLletra = mayuscula.substring(0, 1);
+        //pasa la lletra a majuscula i la guarda a primerMayuscula
         String primerMayuscula = primerLletra.toUpperCase();
+        //Treu la primera lletra i en el return de abaix afageix en el seu lloc la lletra amb mayuscula
         String noPrimeraLletra = mayuscula.substring(1, mayuscula.length());
         return primerMayuscula + noPrimeraLletra;
     }
+
+    private static String menorQueVint(long n) {
+        // Si n es menor a deu es una unitat per tant pasa a la funcio de unitats.
+        if (n < 10) return unitats(n);
+
+        //cast a (int) perque funcioni amb el switch
+        switch ((int) n) {
+            //pasa el int n a String de el numero escrit amb catala.
+            case 10:
+                return "deu";
+            case 11:
+                return "onze";
+            case 12:
+                return "dotze";
+            case 13:
+                return "tretze";
+            case 14:
+                return "catorze";
+            case 15:
+                return "quinze";
+            case 16:
+                return "setze";
+            case 17:
+                return "disset";
+            case 18:
+                return "divuit";
+            case 19:
+                return "dinou";
+            default:
+                break;
+        }
+        //En cas de que no es doni cap cas retorna un String buit.
+        return "";
+    }
+
 
     public static long words(String s) {// La funció “words” fa l’operació inversa: transforma un String en un número de tipus long.
         s = s.toLowerCase();
