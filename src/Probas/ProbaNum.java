@@ -46,26 +46,33 @@ public class ProbaNum {
         } else if (n <= 999_999_999_999L) {
             return milions(n);
         } else if (n <= 999_999_999_999_999_999L) {
-            return bilions(n);
+            return bilionsSay(n);
         } else {
             return trilions(n);
         }
     }
 
+    // Funció per convertir nombres fins a un trilió
     private static String trilions(long n) {
-        if (n < 999_999_999_999_999_999L) return bilions(n);
+        // Si el nombre és menor que un trilió, convertim en bilions
+        if (n < 999_999_999_999_999_999L) return bilionsSay(n);
+        // Cas especial per 1 trilió
         if (n == 1_000_000_000_000_000_000L) return "un trilió";
         else if (n >= 1_000_000_000_000_000_000L && n <= 1_999_999_999_999_999_999L) {
-            return "un trilió " + bilions(n % 1_000_000_000_000_000_000L);
+            // Convertim la part trilió i la part bilions restants
+            return "un trilió " + bilionsSay(n % 1_000_000_000_000_000_000L);
         } else if (n % 1_000_000_000_000_000_000L == 0) {
-            return bilions(n / 1_000_000_000_000_000_000L) + " trilions" + bilions(n % 1_000_000_000_000_000_000L) + milions(n % 100_000_000_000_000L);
+            // Convertim la part trilió, afegim "trilions", la part bilions restants i la part milions restants
+            return bilionsSay(n / 1_000_000_000_000_000_000L) + " trilions" + bilionsSay(n % 1_000_000_000_000_000_000L) + milions(n % 100_000_000_000_000L);
+
         } else if (n >= 2_000_000_000_000_000_000L) {
-            return bilions(n / 1_000_000_000_000_000_000L) + " trilions " + bilions(n % 1_000_000_000_000_000_000L) + milions(n % 10_000_000_000_000L);
+            return bilionsSay(n / 1_000_000_000_000_000_000L) + " trilions " + bilionsSay(n % 1_000_000_000_000_000_000L) + milions(n % 10_000_000_000_000L);
+            // Convertim la part trilió, afegim "trilions", la part bilions restants i la part milions restants
         }
         return "";
     }
 
-    private static String bilions(long n) {
+    private static String bilionsSay(long n) {
         if (n < 999_999_999_999L) return milions(n);
         if (n == 1_000_000_000_000L) return "un bilió";
         else if (n >= 1_000_000_000_000L && n <= 1_999_999_999_999L) {
@@ -91,6 +98,7 @@ public class ProbaNum {
         return "";
     }
 
+    /*
     private static String milers(long n) {
         if (n < 100) return desenesALletres(n);
         if (n < 1000) return centenes(n);
@@ -109,6 +117,43 @@ public class ProbaNum {
             } else if (n % 1000 == 0) {
                 return centenes(n / 1000) + " mil" + centenes(n % 1000);
             } else {
+                return centenes(n / 1000) + " mil " + centenes(n % 1000);
+            }
+        }
+        return "";
+    }
+
+     */
+// Funció per convertir nombres fins a milers
+    private static String milers(long n) {
+        // Si el nombre és menor que 100, convertim en desenes a lletres
+        if (n < 100) return desenesALletres(n);
+        // Si el nombre és menor que 1000, convertim en centenes pasant "n" a la funció centenes
+        if (n < 1000) return centenes(n);
+        // Cas especial per 1000, ja que si es mes de mil se
+        if (n == 1000) {
+            return "mil";
+        } else if (n <= 1999) {
+            // Convertim la part mil i la part centenes restants
+            return "mil " + centenes(n % 1000);
+        } else if (n <= 9999) {
+            if (n % 1000 == 0) {
+                // Convertim la part mil, afegim "mil", la part centenes restants
+                return unitats(n / 1000) + " mil" + centenes(n % 1000);
+            } else {
+                // Convertim la part mil, afegim "mil", la part centenes restants
+                return unitats(n / 1000) + " mil " + centenes(n % 1000);
+            }
+        } else if (n < 99999) {
+            // Convertim la part desenes a lletres, afegim "mil", la part centenes restants
+            return desenesALletres(n / 1000) + " mil " + centenes(n % 1000);
+        } else if (n > 99999 && n <= 999999) {
+
+            if (n % 10000 == 0 || n % 1000 == 0) {
+                // Convertim la part centenes, afegim "mil", la part centenes restants
+                return centenes(n / 1000) + " mil" + centenes(n % 1000);
+            } else {
+                // Convertim la part centenes, afegim "mil", la part centenes restants
                 return centenes(n / 1000) + " mil " + centenes(n % 1000);
             }
         }
