@@ -378,10 +378,10 @@ public class NumbersCat {
                 }
                 if (s.equals("mil")) {
                     milBoolean= true;
-                    if (i==0 && milionsBool==false) {
+                    if (i==0 && !milionsBool) {
                         //si es la darrera posicio, es mil.
                         res+=1000;
-                    } else if (i==0 && milionsBool==true) {
+                    } else if (i==0 && milionsBool) {
                         //casos especials, que com mil milions , el darrer valor desde dreta cap esquerra <--
                         // milioBool esta activat.
                         if (res<1_000) {
@@ -436,7 +436,7 @@ public class NumbersCat {
                 }
 
 
-                if (milBoolean==true) {
+                if (milBoolean) {
                     //guarda el resultat de antes de arribar a mil, de dreta a esquerra
                     long resTemp = res;
                     //per poder multiplicar per mil el següent nombre
@@ -445,15 +445,15 @@ public class NumbersCat {
                     //pasam la cantidad que ocupa el miler a long es a dir el resultat de el nombre
                     // escrit despres de la paraula mil * 1000.
                     res *= 1000;
-                    if (milionsBool==true) {
+                    if (milionsBool) {
                         res *=1_000_000;
                     } else if (boolBilions) {
                         //per si son mil x bilions.
                         res *= 1_000_000_000_000L;
                     }
                     res += resTemp;
-                   // milBoolean= false;
-                } else if (milioBoolean==true) {
+                    // milBoolean= false;
+                } else if (milioBoolean) {
                     milBoolean=false;
                     long resTemp = res;
                     res = 0;
@@ -461,7 +461,6 @@ public class NumbersCat {
                     res *=1_000_000;
                     res += resTemp;
                 } else if (milionsBool) {
-                    System.out.println("ha entrat.");
                     milBoolean=false;
                     long resTemp = res;
                     res = 0;
@@ -665,14 +664,13 @@ public class NumbersCat {
             } else {
                 //si es un nombre que NO va despres de el operador
                 if (!numDespresDeOperador) {
-                    System.out.println("ha entrat despres");
                     numStr1 = numStr1+ " " + s;
                 } else {
                     //si el valor  de numStr esta vuit
                     numStr2 =numStr2+ " "+ s;
                 }
                 if (s!=darrerElementArray) {
-                    System.out.println("ultim " + s);
+                    //si s no es el darrer element en el array --> continue
                     continue;
                 }
                 //asigna a valor2 el valor de String numStr2
