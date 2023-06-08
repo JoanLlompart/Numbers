@@ -11,8 +11,6 @@ public class NumbersCatTest {
         assertEquals("Dinou", NumbersCat.say(19));
         assertEquals("Menys quatre", NumbersCat.say(-4));
     }
-
-
     @org.junit.Test
     public void test2() {
         assertEquals("Quaranta-quatre", NumbersCat.say(44));
