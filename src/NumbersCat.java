@@ -360,17 +360,17 @@ public class NumbersCat {
         boolean boolBilions = false;
         boolean booltrilió =false;
         boolean trilionsBool = false;
-
-        if (ar[0].equals("menys")) { //es negatiu si el primer caracter es menys.
+        //es negatiu si el primer caracter es menys.
+        if (ar[0].equals("menys")) {
             positiu = false;
-            s = s.substring(6); //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
+            //si es negatiu elimina els 6 primer caracters que es el que ocupa el menys
+            s = s.substring(6);
         }
         if (s.contains("mil") || s.contains("milió") || s.contains("milions") || s.contains("bilió") ||
                 s.contains("bilions") ||s.contains("trilió") || s.contains("trilions")) {
 
             for (int i = ar.length-1; i >=0 ; i--) {
                 s = ar[i];
-                // res = identificarWords(s, res);
                 if (s.equals("mil")) {
                     milBoolean= true;
                     if (i==0 && milionsBool==false) {
@@ -390,7 +390,6 @@ public class NumbersCat {
                     continue;
                 } else if (s.equals("milió")) {
                     milioBoolean=true;
-                    //res =1_000_000;
                     continue;
                 } else if (s.equals("milions")) {
                     //activa el boolea de els milions
@@ -433,11 +432,14 @@ public class NumbersCat {
 
 
                 if (milBoolean==true) {
-                    long resTemp = res; //guarda el resultat de antes de arribar a mil, de dreta a esquerra
-                    res = 0; //per poder multiplicar per mil el següent nombre
+                    //guarda el resultat de antes de arribar a mil, de dreta a esquerra
+                    long resTemp = res;
+                    //per poder multiplicar per mil el següent nombre
+                    res = 0;
                     res = identificarWords(s, res);
-                    res *= 1000; //pasam la cantidad que ocupa el miler a long es a dir el resultat de el nombre
+                    //pasam la cantidad que ocupa el miler a long es a dir el resultat de el nombre
                     // escrit despres de la paraula mil * 1000.
+                    res *= 1000;
                     if (milionsBool==true) {
                         res *=1_000_000;
                     } else if (boolBilions) {
