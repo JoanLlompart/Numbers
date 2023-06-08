@@ -606,7 +606,8 @@ public class ProbaNum {
         return 0;
     }
 
-    public static String oper(String s) { //La funció “oper” acceptarà un String on hi ha números representats amb paraules que
+    public static String oper(String s) {
+        //La funció “oper” acceptarà un String on hi ha números representats amb paraules que
         //operen amb altres números. Tornarà un String on hi ha el número (amb paraules) que surt
         //en haver realitzat les operacions.
         long numLong = 0;
@@ -615,7 +616,7 @@ public class ProbaNum {
         boolean numDespresDeOperador = false;
 
         long valor1 = 0;
-        long valor2 = 1;
+        long valor2 = 0;
         String oper = "";
         String numStr1 ="";
         String numStr2 = "";
@@ -644,13 +645,16 @@ public class ProbaNum {
                     System.out.println("ultim " + s);
                     continue;
                 }
+                //asigna a valor2 el valor de String numStr2
                 valor2 = words(numStr2);
+                //asigna a valor1 el valor de String numStr1
                 valor1 = words(numStr1);
 
             }
+            //si es un numero mes que va despres de un operador se realitza la operacio
             if (numDespresDeOperador) {
-
                 result = operacio(valor1,valor2, oper);
+                //tornam a false el boolea de el numDespresDeOperador
                 numDespresDeOperador=false;
                 //break;
             }

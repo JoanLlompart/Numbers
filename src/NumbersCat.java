@@ -360,6 +360,7 @@ public class NumbersCat {
         boolean boolBilions = false;
         boolean booltrilió =false;
         boolean trilionsBool = false;
+        boolean stringNull = false;
         //es negatiu si el primer caracter es menys.
         if (ar[0].equals("menys")) {
             positiu = false;
@@ -371,6 +372,10 @@ public class NumbersCat {
 
             for (int i = ar.length-1; i >=0 ; i--) {
                 s = ar[i];
+                if (s.equals("")) {
+                    stringNull=true;
+                    s = ar[i+1];
+                }
                 if (s.equals("mil")) {
                     milBoolean= true;
                     if (i==0 && milionsBool==false) {
