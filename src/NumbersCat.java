@@ -23,6 +23,7 @@ public class NumbersCat {
  */
 
     }
+
     public static String say(long n) {
 
         boolean positiu = true;
@@ -102,6 +103,7 @@ public class NumbersCat {
         }
         return "";
     }
+
     private static String bilionsSay(long n) {
         if (n < 999_999_999_999L) {
             // Si el nombre és menor a 999999999999, convertim en milions
@@ -125,6 +127,7 @@ public class NumbersCat {
         }
         return "";
     }
+
     private static String milions(long n) {
         if (n < 999999) {
             // Si el nombre és menor a 999999, convertim en milers
@@ -358,7 +361,7 @@ public class NumbersCat {
         boolean milionsBool = false;
         boolean bilioBool = false;
         boolean boolBilions = false;
-        boolean booltrilió =false;
+        boolean booltrilió = false;
         boolean trilionsBool = false;
         boolean stringNull = false;
         //es negatiu si el primer caracter es menys.
@@ -368,70 +371,70 @@ public class NumbersCat {
             s = s.substring(6);
         }
         if (s.contains("mil") || s.contains("milió") || s.contains("milions") || s.contains("bilió") ||
-                s.contains("bilions") ||s.contains("trilió") || s.contains("trilions")) {
+                s.contains("bilions") || s.contains("trilió") || s.contains("trilions")) {
 
-            for (int i = ar.length-1; i >=0 ; i--) {
+            for (int i = ar.length - 1; i >= 0; i--) {
                 s = ar[i];
                 if (s.equals("")) {
-                    stringNull=true;
-                    s = ar[i+1];
+                    stringNull = true;
+                    s = ar[i + 1];
                 }
                 if (s.equals("mil")) {
-                    milBoolean= true;
-                    if (i==0 && !milionsBool) {
+                    milBoolean = true;
+                    if (i == 0 && !milionsBool) {
                         //si es la darrera posicio, es mil.
-                        res+=1000;
-                    } else if (i==0 && milionsBool) {
+                        res += 1000;
+                    } else if (i == 0 && milionsBool) {
                         //casos especials, que com mil milions , el darrer valor desde dreta cap esquerra <--
                         // milioBool esta activat.
-                        if (res<1_000) {
+                        if (res < 1_000) {
                             //si el resultat actual es mes petit que mil
                             //afegim mil
                             res += 1_000;
                         }
                         //multiplicam el resultat actual per mil
-                        res *=1_000_000;
+                        res *= 1_000_000;
                     }
                     continue;
                 } else if (s.equals("milió")) {
-                    milioBoolean=true;
+                    milioBoolean = true;
                     continue;
                 } else if (s.equals("milions")) {
                     //activa el boolea de els milions
-                    milionsBool=true;
+                    milionsBool = true;
                     //Desactiva el boolean de els milers
-                    milBoolean=false;
+                    milBoolean = false;
                     continue;
                 } else if (s.equals("bilió")) {
-                    milionsBool= false;
+                    milionsBool = false;
                     milBoolean = false;
                     //activa el boolea de el bilió
-                    bilioBool=true;
+                    bilioBool = true;
                     continue;
 
                 } else if (s.equals("bilions")) {
                     //activa el boolea de el bilions
-                    boolBilions=true;
+                    boolBilions = true;
                     //posam a false els milions i milers
-                    milionsBool= false;
+                    milionsBool = false;
                     milBoolean = false;
                     continue;
                 } else if (s.equals("trilió")) {
                     // Desactiva els booleans de els mil,milions
-                    milionsBool= false;
+                    milionsBool = false;
                     milBoolean = false;
-                    bilioBool=false;
+                    bilioBool = false;
                     //activa el boolea de el trilió
-                    booltrilió=true;
+                    booltrilió = true;
                     continue;
                 } else if (s.equals("trilions")) {
                     // Desactiva els booleans de els mil,milions
-                    milionsBool= false;
+                    milionsBool = false;
                     milBoolean = false;
-                    bilioBool=false;
+                    bilioBool = false;
                     boolBilions = false;
                     //activa el boolea d'el trilions
-                    trilionsBool=true;
+                    trilionsBool = true;
                     continue;
                 }
 
@@ -446,7 +449,7 @@ public class NumbersCat {
                     // escrit despres de la paraula mil * 1000.
                     res *= 1000;
                     if (milionsBool) {
-                        res *=1_000_000;
+                        res *= 1_000_000;
                     } else if (boolBilions) {
                         //per si son mil x bilions.
                         res *= 1_000_000_000_000L;
@@ -454,49 +457,49 @@ public class NumbersCat {
                     res += resTemp;
                     // milBoolean= false;
                 } else if (milioBoolean) {
-                    milBoolean=false;
+                    milBoolean = false;
                     long resTemp = res;
                     res = 0;
-                    res = identificarWords(s,res);
-                    res *=1_000_000;
+                    res = identificarWords(s, res);
+                    res *= 1_000_000;
                     res += resTemp;
                 } else if (milionsBool) {
-                    milBoolean=false;
+                    milBoolean = false;
                     long resTemp = res;
                     res = 0;
-                    res = identificarWords(s,res);
+                    res = identificarWords(s, res);
                     res *= 1_000_000;
                     res += resTemp;
                 } else if (bilioBool) {
-                    milionsBool=false;
+                    milionsBool = false;
                     long resTemp = res;
                     res = 0;
-                    res = identificarWords(s,res);
+                    res = identificarWords(s, res);
                     //multiplica per un bilió
                     res *= 1_000_000_000_000L;
                     res += resTemp;
 
                 } else if (boolBilions) {
-                    milionsBool =false;
+                    milionsBool = false;
                     long resTemp = res;
                     res = 0;
-                    res = identificarWords(s,res);
+                    res = identificarWords(s, res);
                     //multiplica per un bilió
                     res *= 1_000_000_000_000L;
                     res += resTemp;
                 } else if (booltrilió) {
-                    boolBilions= false;
+                    boolBilions = false;
                     long resTemp = res;
                     res = 0;
-                    res = identificarWords(s,res);
+                    res = identificarWords(s, res);
                     //multiplica per un bilió
                     res *= 1_000_000_000_000_000_000L;
                     res += resTemp;
                 } else if (trilionsBool) {
-                    boolBilions= false;
+                    boolBilions = false;
                     long resTemp = res;
                     res = 0;
-                    res = identificarWords(s,res);
+                    res = identificarWords(s, res);
                     //multiplica per un bilió
                     res *= 1_000_000_000_000_000_000L;
                     res += resTemp;
@@ -521,13 +524,13 @@ public class NumbersCat {
 
     private static long identificarWords(String s, long res) {
         switch (s) {
-            case "un","dos","tres","quantre","cinc","sis","set","vuit","nou" :
-                res = unitatsEscrit(s,res);
+            case "un", "dos", "tres", "quantre", "cinc", "sis", "set", "vuit", "nou":
+                res = unitatsEscrit(s, res);
                 break;
-            case "deu","onze","dotze","tretze","catorze","quinze","setze","disset","divuit","dinou":
-                res = unitatsEscrit(s,res);
+            case "deu", "onze", "dotze", "tretze", "catorze", "quinze", "setze", "disset", "divuit", "dinou":
+                res = unitatsEscrit(s, res);
                 break;
-            case "vint","trenta","quaranta","cinquanta","seixanta","setanta","vuitanta","noranta":
+            case "vint", "trenta", "quaranta", "cinquanta", "seixanta", "setanta", "vuitanta", "noranta":
                 res += desena(s);
                 break;
             case "cent":
@@ -542,7 +545,7 @@ public class NumbersCat {
 
         if (s.contains("-i-")) {
             //guardam el valor actual de res
-            long resTemp =res;
+            long resTemp = res;
             //el valor de res el posam a 20
             res = 20;
             // la unitat de la vintena
@@ -550,7 +553,7 @@ public class NumbersCat {
             //pasam a long la unitat i li suma a res que es 20
             res = unitatsEscrit(residuVint, 20);
             //Amb el resultat que teniem antes li sumam el de la vintena.
-            res +=resTemp;
+            res += resTemp;
         } else if (s.equals("vint") || s.equals("trenta") || s.equals("quaranta") || s.equals("cinquanta") ||
                 s.equals("seixanta") || s.equals("setanta") || s.equals("vuitanta") || s.equals("noranta")) {
             res = desena(s);
@@ -558,16 +561,16 @@ public class NumbersCat {
             //valors menors de 100
             String[] separaMenorCent = s.split("-");
             // agafa la desena i la unitat
-            res =desena(separaMenorCent[separaMenorCent.length - 2]) +
+            res = desena(separaMenorCent[separaMenorCent.length - 2]) +
                     unitatsEscrit(separaMenorCent[separaMenorCent.length - 1], res);
 
         } else if (s.contains("cents")) {
             String[] centsSepara = s.split("-");
             //Variable temporal per guardar la centena
-            long resTemp =0;
+            long resTemp = 0;
             resTemp = unitatsEscrit(centsSepara[centsSepara.length - 2], resTemp);
             //la unitat de la centena se multiplica per cent per convertirse en centena.
-            resTemp *=100;
+            resTemp *= 100;
             //se suma el resTemp amb el resultat general i la suma es el nou res
             res += resTemp;
 
@@ -576,7 +579,7 @@ public class NumbersCat {
             long resTemp = res;
             //per poder multiplicar per mil el següent nombre
             res = 0;
-            res +=resTemp;
+            res += resTemp;
 
             return res;
         }
@@ -587,7 +590,7 @@ public class NumbersCat {
     private static long unitatsEscrit(String s, long res) {
 
         switch (s) {
-            case "zero" -> res +=0;
+            case "zero" -> res += 0;
             case "un" -> res += 1;
             case "dos" -> res += 2;
             case "tres" -> res += 3;
@@ -632,6 +635,7 @@ public class NumbersCat {
         }
         return 0;
     }
+
     public static String oper(String s) { //La funció “oper” acceptarà un String on hi ha números representats amb paraules que
         //operen amb altres números. Tornarà un String on hi ha el número (amb paraules) que surt
         //en haver realitzat les operacions.
@@ -645,14 +649,14 @@ public class NumbersCat {
         long valor1 = 0;
         long valor2 = 0;
         String oper = "";
-        String numStr1 ="";
+        String numStr1 = "";
         String numStr2 = "";
 
         //boolean per determinar si ja hi ha els nombres
         boolean llestPerOperar = false;
         long result = 0;
         //guarda el darrer element en el array
-        String darrerElementArray = ar[ar.length-1];
+        String darrerElementArray = ar[ar.length - 1];
         for (int i = 0; i < ar.length; i++) {
 
             s = ar[i];
@@ -664,12 +668,12 @@ public class NumbersCat {
             } else {
                 //si es un nombre que NO va despres de el operador
                 if (!numDespresDeOperador) {
-                    numStr1 = numStr1+ " " + s;
+                    numStr1 = numStr1 + " " + s;
                 } else {
                     //si el valor  de numStr esta vuit
-                    numStr2 =numStr2+ " "+ s;
+                    numStr2 = numStr2 + " " + s;
                 }
-                if (s!=darrerElementArray) {
+                if (s != darrerElementArray) {
                     //si s no es el darrer element en el array --> continue
                     continue;
                 }
@@ -680,9 +684,9 @@ public class NumbersCat {
             }
             //si es un numero mes que va despres de un operador se realitza la operacio
             if (numDespresDeOperador) {
-                result = operacio(valor1,valor2, oper);
+                result = operacio(valor1, valor2, oper);
                 //tornam a false el boolea de el numDespresDeOperador
-                numDespresDeOperador=false;
+                numDespresDeOperador = false;
                 //break;
             }
         }
@@ -690,20 +694,20 @@ public class NumbersCat {
         return say(result);
     }
 
-    private static long operacio(long valor1,long valor2,String oper) {
-        long resultat =0;
+    private static long operacio(long valor1, long valor2, String oper) {
+        long resultat = 0;
         switch (oper) {
             case "menys":
-                resultat= valor1 - valor2;
+                resultat = valor1 - valor2;
                 break;
             case "més":
-                resultat= valor1 + valor2;
+                resultat = valor1 + valor2;
                 break;
             case "dividit":
-                resultat= valor1/valor2;
+                resultat = valor1 / valor2;
                 break;
             case "per":
-                resultat= valor1 * valor2;
+                resultat = valor1 * valor2;
                 break;
             default:
                 break;
